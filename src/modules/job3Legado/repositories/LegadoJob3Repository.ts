@@ -6,6 +6,7 @@ import Produto from '../../produto/entities/Produto'
 
 class EmpresaRepository {
   public async createOrUpdate(dados: Produto[] | Pessoa[], tabela: string): Promise<number> {
+    //TODO Repository generico
     return await knex(tabela).insert(dados).onConflict().merge()
       .then((dados) => {
         Logger.info(dados[0])
