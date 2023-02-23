@@ -18,7 +18,7 @@ exports.up = function (knex) {
     tabela.string('ambiente', 104).notNullable()
     tabela.integer('nivel').notNullable().unsigned()
     tabela.timestamps(true, true)
-    tabela.unique(['cpfcnpj', 'tenantId', 'usuario'])
+    tabela.unique(['docUsuario', 'tenantId', 'usuario'])
   })
 }
 
