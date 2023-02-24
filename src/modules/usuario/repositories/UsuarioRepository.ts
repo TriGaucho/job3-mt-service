@@ -28,7 +28,7 @@ class UsaurioRepository {
       })
   }
 
-  public async showAll(): Promise<Usuario[] | void> {
+  public async showAll(tenantId: string): Promise<Usuario[] | void> {
     return await knex('usuario')
       .then((dados) => {
         Logger.info(dados)

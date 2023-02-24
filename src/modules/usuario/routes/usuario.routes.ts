@@ -6,5 +6,6 @@ const usuarioRouter = Router()
 const usuarioController = new UsuarioController()
 
 usuarioRouter.post('/:tenantId', usuarioController.create)
+usuarioRouter.get('/:tenantId', usuarioController.showAll)
 
 export default usuarioRouter

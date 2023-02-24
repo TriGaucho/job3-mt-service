@@ -1,11 +1,12 @@
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
-import Pessoa from '../../pessoa/entities/Pessoa'
-import Produto from '../../produto/entities/Produto'
+import Pessoa from '@modules/pessoa/entities/Pessoa'
+import Produto from '@modules/produto/entities/Produto'
+import Usuario from "@modules/usuario/entities/Usuario"
 
 class EmpresaRepository {
-  public async createOrUpdate(dados: Produto[] | Pessoa[], tabela: string): Promise<number> {
+  public async createOrUpdate(dados: Produto[] | Pessoa[] | Usuario[], tabela: string): Promise<number> {
     //TODO Repository generico
     return await knex(tabela).insert(dados).onConflict().merge()
       .then((dados) => {
