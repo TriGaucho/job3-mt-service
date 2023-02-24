@@ -12,7 +12,7 @@ exports.up = function up (knex) {
     tabela.string('telefone', 24).notNullable()
     tabela.string('cep', 8).notNullable()
     tabela.string('bairro', 64).notNullable()
-    tabela.string('logradouro', 168).notNullable()
+    tabela.string('endereco', 168).notNullable()
     tabela.string('cidade', 64).notNullable()
     tabela.string('uf', 2).notNullable()
     tabela.integer('qtdUsuarios').notNullable().unsigned()
