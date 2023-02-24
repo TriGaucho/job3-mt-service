@@ -3,7 +3,7 @@ import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Usuario from '../entities/Usuario'
 
-class UsaurioRepository {
+class UsuarioRepository {
   public async create(usuario: Usuario): Promise<number> {
     return await knex('usuario').insert(usuario).returning('idUsuario')
       .then((dados) => {
@@ -41,4 +41,4 @@ class UsaurioRepository {
   }
 }
 
-export default UsaurioRepository
+export default UsuarioRepository

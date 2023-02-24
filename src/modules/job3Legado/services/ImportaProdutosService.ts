@@ -1,7 +1,8 @@
 import AppError from '@shared/erros/AppError'
 import InsereTenantId from '@shared/utils/insereTenantId'
-import Produto from '../../produto/entities/Produto'
 import LegadoJob3Repository from '../repositories/LegadoJob3Repository'
+
+import Produto from '@modules/produto/entities/Produto'
 
 class ImportaProdutosService {
   public async execute(produtosArray:Produto[], tenantId: string): Promise<number> {

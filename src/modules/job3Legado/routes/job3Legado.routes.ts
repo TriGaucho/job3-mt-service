@@ -7,5 +7,6 @@ const job3LegadoController = new Job3LegadoController()
 
 empresaRouter.post('/produto/:tenantId', job3LegadoController.importProdutos)
 empresaRouter.post('/pessoa/:tenantId', job3LegadoController.importPessoas)
+empresaRouter.post('/usuario/:tenantId', job3LegadoController.importUsuarios)
 
 export default empresaRouter
