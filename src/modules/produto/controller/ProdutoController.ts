@@ -6,8 +6,8 @@ export default class ProdutoController {
     const { tenantId } = req.params
     const showAllProdutosService = new ShowAllProdutosService()
 
-    const empresas = await showAllProdutosService.execute(tenantId)
+    const produtos = await showAllProdutosService.execute(tenantId)
 
-    return res.json(empresas)
+    return res.json(produtos)
   }
 }
