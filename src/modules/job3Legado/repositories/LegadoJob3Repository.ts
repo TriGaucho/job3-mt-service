@@ -4,9 +4,10 @@ import Logger from "@shared/logger/Logger"
 import Pessoa from '@modules/pessoa/entities/Pessoa'
 import Produto from '@modules/produto/entities/Produto'
 import Usuario from "@modules/usuario/entities/Usuario"
+import PlanoPagamento from "@modules/planoPagamento/entities/PlanoPagamento"
 
 class EmpresaRepository {
-  public async createOrUpdate(dados: Produto[] | Pessoa[] | Usuario[], tabela: string): Promise<number> {
+  public async createOrUpdate(dados: Produto[] | Pessoa[] | Usuario[] | PlanoPagamento[], tabela: string): Promise<number> {
     //TODO Repository generico
     return await knex(tabela).insert(dados).onConflict().merge()
       .then((dados) => {

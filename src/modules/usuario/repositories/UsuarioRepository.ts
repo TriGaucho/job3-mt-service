@@ -29,7 +29,7 @@ class UsuarioRepository {
   }
 
   public async showAll(tenantId: string): Promise<Usuario[] | void> {
-    return await knex('usuario')
+    return await knex('usuario').where({ tenantId })
       .then((dados) => {
         Logger.info(dados)
         return dados

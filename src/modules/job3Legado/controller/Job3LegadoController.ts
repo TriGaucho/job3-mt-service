@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import ImportaProdutosService from '../services/ImportaProdutosService'
 import ImportaPessoasService from '../services/ImportaPessoasService'
 import ImportaUsuariosService from '../services/ImportaUsuariosService'
+import ImportaPlanosPagamentoService from '../services/ImportaPlanosPagamentoService'
 
 export default class Job3LegadoController {
   public async importProdutos(req: Request, res: Response): Promise<Response> {
@@ -32,5 +33,15 @@ export default class Job3LegadoController {
     const usuarios = await importaUsuariosService.execute(body, tenantId)
 
     return res.json(usuarios)
+  }
+
+  public async importPlanosPagamento(req: Request, res: Response): Promise<Response> {
+    const { body } = req
+    const { tenantId } = req.params
+
+    const importaPlanosPagamentoService = new ImportaPlanosPagamentoService()
+    const planosPagamento = await importaPlanosPagamentoService.execute(body, tenantId)
+
+    return res.json(planosPagamento)
   }
 }
