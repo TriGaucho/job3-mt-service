@@ -3,8 +3,8 @@ import cors from 'cors'
 import 'dotenv/config'
 import 'express-async-errors'
 
-import AppError from '@shared/erros/AppError'
-import Logger from '@shared/logger/Logger'
+import AppError from './shared/erros/AppError'
+import Logger from './shared/logger/Logger'
 
 import routes from './routes'
 
