@@ -3,6 +3,7 @@ import ImportaProdutosService from '../services/ImportaProdutosService'
 import ImportaPessoasService from '../services/ImportaPessoasService'
 import ImportaUsuariosService from '../services/ImportaUsuariosService'
 import ImportaPlanosPagamentoService from '../services/ImportaPlanosPagamentoService'
+import ExportaPedidosService from '../services/ExportaPedidosService'
 
 export default class Job3LegadoController {
   public async importProdutos(req: Request, res: Response): Promise<Response> {
@@ -43,5 +44,14 @@ export default class Job3LegadoController {
     const planosPagamento = await importaPlanosPagamentoService.execute(body, tenantId)
 
     return res.json(planosPagamento)
+  }
+
+  public async exportaPedidos(req: Request, res: Response): Promise<Response> {
+    const { tenantId } = req.params
+
+    const exportaPedidosService = new ExportaPedidosService()
+    const pedidos = await exportaPedidosService.execute(tenantId)
+
+    return res.json(pedidos)
   }
 }

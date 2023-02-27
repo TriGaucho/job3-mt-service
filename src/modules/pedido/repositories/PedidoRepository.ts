@@ -2,7 +2,9 @@ import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Pedido from '../entities/Pedido'
+import PedidoBanco from '../entities/PedidoBanco'
 import ProdutosPedido from '../entities/ProdutosPedido'
+import Pedidos from '../entities/PedidoExport'
 
 class PedidoRepository {
   public async createPedido(pedido: Pedido): Promise<number> {
@@ -28,16 +30,27 @@ class PedidoRepository {
         this.delete(idPedido)
         throw new AppError(erro.sqlMessage)
       })
-    }
+  }
 
-    public async delete(idPedido: number): Promise<number> {
-      return await knex('pedido').where({ idPedido }).del()
+  public async delete(idPedido: number): Promise<number> {
+    return await knex('pedido').where({ idPedido }).del()
       .then((dados) => {
         Logger.info(`Pedido ${idPedido} deletado.`)
         Logger.info(dados)
         return dados
       })
       .catch(erro => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async showAll(sqlPedidos: string): Promise<PedidoBanco[]> {
+    return await knex.raw(sqlPedidos)
+      .then((dados) => {
+        return dados[0]
+      })
+      .catch((erro) => {
         Logger.error(erro)
         throw new AppError(erro.sqlMessage)
       })
