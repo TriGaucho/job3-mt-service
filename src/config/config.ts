@@ -7,8 +7,8 @@ export default {
     connection: {
       host: process.env.DATABASE_HOST,
       database: process.env.DATABASE_NAME,
-      user: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASS
+      user: process.env.SERVICE_USER,
+      password: process.env.SERVICE_PASS
     },
     pool: {
       min: 2,

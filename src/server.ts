@@ -9,7 +9,7 @@ import Logger from '@shared/logger/Logger'
 import routes from './routes'
 
 const app = express()
-const port = process.env.PORT_APP
+const port = process.env.PORT_SERVICE
 
 app.use(cors())
 app.use(express.json())
