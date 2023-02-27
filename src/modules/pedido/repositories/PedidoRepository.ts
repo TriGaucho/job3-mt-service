@@ -4,7 +4,6 @@ import Logger from "@shared/logger/Logger"
 import Pedido from '../entities/Pedido'
 import PedidoBanco from '../entities/PedidoBanco'
 import ProdutosPedido from '../entities/ProdutosPedido'
-import Pedidos from '../entities/PedidoExport'
 
 class PedidoRepository {
   public async createPedido(pedido: Pedido): Promise<number> {
@@ -49,6 +48,17 @@ class PedidoRepository {
     return await knex.raw(sqlPedidos)
       .then((dados) => {
         return dados[0]
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async update(tenantId: string, idPedido: number[], update: object): Promise<number> {
+    return await knex('pedido').update({ ...update }).whereIn("idPedido", idPedido).where({ tenantId })
+      .then((dados) => {
+        return dados
       })
       .catch((erro) => {
         Logger.error(erro)

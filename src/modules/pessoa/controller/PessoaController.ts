@@ -10,4 +10,6 @@ export default class PessoaController {
 
     return res.json(pessoas)
   }
+
+  //TODO cadastra pessoa
 }

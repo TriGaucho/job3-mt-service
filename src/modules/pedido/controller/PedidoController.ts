@@ -12,7 +12,8 @@ export default class PedidoController {
     return res.json(pedido)
   }
 
-  // proximoNumeroPedido
-  // cabeçalho
-  // detalhesPedido
+  //TODO proximoNumeroPedido
+  //TODO cabeçalho
+  //TODO detalhesPedido
+  //TODO atualiza status pedido
 }
