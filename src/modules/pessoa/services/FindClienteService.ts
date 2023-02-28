@@ -8,6 +8,7 @@ interface iRequest {
 }
 
 interface iResponse {
+  clienteId?: number
   clienteNome: string
   clienteCpf: string
   clienteFone: string
@@ -25,6 +26,7 @@ class FindClienteService {
 
   async transformPessoa(pessoa: Pessoa): Promise<iResponse> {
     return {
+      clienteId: pessoa.idPessoa,
       clienteNome: pessoa.nome,
       clienteCpf:pessoa.cpfCnpj,
       clienteFone:pessoa.telefone,
