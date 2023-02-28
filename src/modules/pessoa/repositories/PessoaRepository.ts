@@ -15,6 +15,18 @@ class PessoaRepository {
         throw new AppError(erro.sqlMessage)
       })
   }
+
+  public async findCliente(tenantId: string, cpfCnpj: string): Promise<Pessoa| void> {
+    return await knex('pessoa').where({ tenantId, cpfCnpj })
+      .then((dados) => {
+        Logger.info(dados)
+        return dados[0]
+      })
+      .catch(erro => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
 }
 
 export default PessoaRepository
