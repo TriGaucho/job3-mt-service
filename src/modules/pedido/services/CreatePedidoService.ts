@@ -11,23 +11,12 @@ interface iCliente {
 
 class CreatePedidoService {
   public async execute(dadosPedido: Pedido, produtosPedido: ProdutosPedido[], dadosCliente: iCliente, tenantId: string): Promise<number> {
+    const pedidoRepository = new PedidoRepository()
 
     if (dadosCliente) {
-      //cadastrar o cliente
-      const { telefone, cep, logradouro, bairro, cidade, uf } = dadosPedido
-
-      const cliente = { ...dadosCliente, telefone, cep, logradouro, bairro, cidade, uf }
-
-      const createClienteService = new CreateClienteService()
-
-      const idCliente = await createClienteService.execute(tenantId, cliente)
-
-      if (!idCliente) throw new AppError('Não foi possível cadastrar o cliente do pedido.')
-
-      dadosPedido.cliente = idCliente
+      dadosPedido.cliente = await this.createCliente(tenantId, dadosCliente, dadosPedido)
     }
 
-    const pedidoRepository = new PedidoRepository()
 
     const idPedido = await pedidoRepository.createPedido({ ...dadosPedido, tenantId })
 
@@ -49,6 +38,17 @@ class CreatePedidoService {
     })
     return produtos
   }
+
+  async createCliente(tenantId: string, dadosCliente: iCliente, dadosPedido: Pedido): Promise<number> {
+    const createClienteService = new CreateClienteService()
+
+    const { telefone, cep, logradouro, bairro, cidade, uf } = dadosPedido
+
+    const cliente = { ...dadosCliente, telefone, cep, logradouro, bairro, cidade, uf }
+
+    return await createClienteService.execute(tenantId, cliente)
+  }
+
 }
 
 export default CreatePedidoService

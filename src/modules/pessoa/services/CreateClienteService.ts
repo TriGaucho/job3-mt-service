@@ -21,7 +21,7 @@ class CreateClienteService {
 
     const idCliente = await pessoaRepository.create(dadosCliente)
 
-    if (!idCliente) throw new AppError('Nenhum cliente encontrado')
+    if (!idCliente) throw new AppError('Não foi possível cadastrar o cliente.')
 
     return idCliente
   }

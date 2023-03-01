@@ -66,6 +66,17 @@ class PedidoRepository {
       })
   }
 
+  public async proximoNumero(sql: string): Promise<number> {
+    return await knex.raw(sql)
+      .then((dados) => {
+        return dados[0][0]
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
 }
 
 export default PedidoRepository
