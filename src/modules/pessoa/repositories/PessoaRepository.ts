@@ -27,6 +27,18 @@ class PessoaRepository {
         throw new AppError(erro.sqlMessage)
       })
   }
+
+  public async create(pessoa: Pessoa): Promise<number> {
+    return await knex('pessoa').insert(pessoa)
+      .then((dados) => {
+        Logger.info(dados[0])
+        return dados[0]
+      })
+      .catch(erro => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
 }
 
 export default PessoaRepository

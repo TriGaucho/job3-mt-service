@@ -2,13 +2,13 @@ class Pessoa {
   idPessoa?: number
   docUsuario?: string
   nome: string
-  segundoNome: string
+  segundoNome?: string
   cpfCnpj: string
-  rgInscricao: string
-  email: string
+  rgInscricao?: string
+  email?: string
   telefone: string
   cep: string
-  logradouro: string
+  endereco: string
   bairro: string
   cidade: string
   uf: string
@@ -20,3 +20,4 @@ class Pessoa {
 }
 
 export default Pessoa
+

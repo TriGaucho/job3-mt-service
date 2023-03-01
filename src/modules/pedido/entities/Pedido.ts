@@ -2,11 +2,11 @@ class Pedido {
   idPedido?: number
   numeroPedido: number
   tenantId: string
-  cliente: string
+  cliente?: number
   docUsuario: string
   email?: string
   planoPagamento?: string
-  telefone?: string
+  telefone: string
   cep: string
   logradouro: string
   bairro: string
@@ -18,6 +18,8 @@ class Pedido {
   created_at?: Date
   updated_at?: Date
   importado?: boolean
+  clienteNome: string
+  clienteCpf: string
 }
 
 export default Pedido
