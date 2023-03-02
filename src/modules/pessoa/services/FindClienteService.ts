@@ -1,6 +1,7 @@
 import AppError from "@shared/erros/AppError"
 import PessoaRepository from "../repositories/PessoaRepository"
 import Pessoa from "../entities/Pessoa"
+import RemoveMascara from "@shared/utils/removeMascaraCPF"
 
 interface iRequest {
   tenantId: string
@@ -17,7 +18,8 @@ interface iResponse {
 class FindClienteService {
   public async execute({ tenantId, cpfCnpj }: iRequest): Promise<iResponse> {
     const pessoaRepository = new PessoaRepository()
-
+    const cpfCnpjs = await RemoveMascara(cpfCnpj)
+    cpfCnpj = cpfCnpjs
     const pessoa = await pessoaRepository.findCliente(tenantId, cpfCnpj)
 
     if (!pessoa) throw new AppError('Nenhum cliente encontrado')

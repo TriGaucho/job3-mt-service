@@ -3,6 +3,7 @@ import AppError from '@shared/erros/AppError'
 import Pedido from '../entities/Pedido'
 import ProdutosPedido from '../entities/ProdutosPedido'
 import PedidoRepository from '../repositories/PedidoRepository'
+import ProximoNumeroService from './ProximoNumeroService'
 
 interface iCliente {
   clienteNome: string
@@ -17,6 +18,11 @@ class CreatePedidoService {
       dadosPedido.cliente = await this.createCliente(tenantId, dadosCliente, dadosPedido)
     }
 
+    if (!dadosPedido.numeroPedido) {
+      const proximoNumeroService = new ProximoNumeroService()
+      const numero = await proximoNumeroService.execute(tenantId)
+      dadosPedido.numeroPedido = numero.proximoNumero
+    }
 
     const idPedido = await pedidoRepository.createPedido({ ...dadosPedido, tenantId })
 
@@ -28,7 +34,6 @@ class CreatePedidoService {
     if (!produtos) throw new AppError(`Não foi possível adastrar os produtos do pedido ${idPedido}.`)
 
     return idPedido
-
   }
 
   async insertIdPedidoProdutos(idPedido: number, tenantId: string, produtos: ProdutosPedido[]): Promise<ProdutosPedido[]> {
