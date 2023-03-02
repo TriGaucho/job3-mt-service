@@ -7,9 +7,11 @@ import AppError from './shared/erros/AppError'
 import Logger from './shared/logger/Logger'
 
 import routes from './routes'
+import config from './config/config'
 
 const app = express()
-const port = process.env.PORT_SERVICE
+const porta = process.env.PORT_SERVICE
+const versao = config.versao
 
 app.use(cors())
 app.use(express.json())
@@ -30,7 +32,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.use(routes)
 
 routes.get('/', (request, response) => {
-  return response.json({ message: '20230218' });
+  return response.json({ message: versao });
 })
 
 
@@ -54,6 +56,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(port, () => {
-  Logger.info(`Servidor iniciado na porta ${port} !`)
+app.listen(porta, () => {
+  Logger.info({porta, versao})
 })

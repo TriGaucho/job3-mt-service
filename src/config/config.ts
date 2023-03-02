@@ -1,6 +1,7 @@
 import 'dotenv/config'
 
 export default {
+  versao: 20230302,
   knex: {
     asyncStackTraces: true,
     client: process.env.DATABASE_CLIENT,
