@@ -1,13 +1,13 @@
 import 'dotenv/config'
 
 export default {
-  versao: 20230302,
+  versao: 20230309,
   knex: {
     asyncStackTraces: true,
     client: process.env.DATABASE_CLIENT,
     connection: {
       host: process.env.DATABASE_HOST,
-      database: process.env.DATABASE_NAME,
+      database: process.env.SERVICE_NAME,
       user: process.env.SERVICE_USER,
       password: process.env.SERVICE_PASS
     },
