@@ -1,9 +1,9 @@
-import Pedido from "@modules/pedido/entities/PedidoExport";
-import ShowAllPedidosService from '@modules/pedido/services/ShowAllPedidosService'
+import Documento from "@modules/pedido/entities/DocumentoExport";
+import ShowAllDocumentosService from '@modules/pedido/services/ShowAllDocumentosService'
 
 class ExportaPedidosService {
-  public async execute (tenantId: string): Promise<Pedido[]> {
-    const showAllPedidosService = new ShowAllPedidosService()
+  public async execute (tenantId: string): Promise<Documento[]> {
+    const showAllPedidosService = new ShowAllDocumentosService()
 
     const pedidos = showAllPedidosService.execute(tenantId, false)
 

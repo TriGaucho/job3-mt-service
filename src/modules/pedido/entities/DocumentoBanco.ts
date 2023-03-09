@@ -1,6 +1,6 @@
-class PedidoBanco {
-  idPedido: number
-  numeroPedido: number
+class DocumentoBanco {
+  idDocumento: number
+  numeroDocumento: number
   cliente: string
   idCliente: number
   documentoCliente: string
@@ -31,6 +31,7 @@ class PedidoBanco {
   valorUnidade: number
   desconto: number
   planoPagamento: string
+  tipoDocumento: number
 }
 
-export default PedidoBanco
+export default DocumentoBanco

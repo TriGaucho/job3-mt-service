@@ -1,6 +1,6 @@
-class Pedido {
-  idPedido?: number
-  numeroPedido: number
+class Documento {
+  idDocumento?: number
+  numeroDocumento: number
   tenantId: string
   cliente?: number
   docUsuario: string
@@ -20,6 +20,7 @@ class Pedido {
   importado?: boolean
   clienteNome: string
   clienteCpf: string
+  tipoDocumento: number
 }
 
-export default Pedido
+export default Documento

@@ -1,13 +1,14 @@
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
-import Pedido from '../entities/Pedido'
-import PedidoBanco from '../entities/PedidoBanco'
-import ProdutosPedido from '../entities/ProdutosPedido'
+import { documento, produtosDocumento } from "@shared/consts/banco"
+import Documento from '../entities/Documento'
+import DocumentoBanco from '../entities/DocumentoBanco'
+import ProdutosDocumento from '../entities/ProdutosDocumento'
 
-class PedidoRepository {
-  public async createPedido(pedido: Pedido): Promise<number> {
-    return await knex('pedido').insert(pedido).returning('idPedido')
+class DocumentoRepository {
+  public async createDocumento(dados: Documento): Promise<number> {
+    return await knex(documento).insert(dados).returning('idDocumento')
       .then((dados) => {
         Logger.info(dados[0])
         return dados[0]
@@ -18,23 +19,23 @@ class PedidoRepository {
       })
   }
 
-  public async createProdutosPedido(produtosPedido: ProdutosPedido[], idPedido: number): Promise<boolean> {
-    return await knex('produtosPedido').insert(produtosPedido)
+  public async createProdutosDocumento(dados: ProdutosDocumento[], idDocumento: number): Promise<boolean> {
+    return await knex(produtosDocumento).insert(dados)
       .then((dados) => {
         Logger.info(dados)
         return true
       })
       .catch(erro => {
         Logger.error(erro)
-        this.delete(idPedido)
+        this.delete(idDocumento)
         throw new AppError(erro.sqlMessage)
       })
   }
 
-  public async delete(idPedido: number): Promise<number> {
-    return await knex('pedido').where({ idPedido }).del()
+  public async delete(idDocumento: number): Promise<number> {
+    return await knex(documento).where({ idDocumento }).del()
       .then((dados) => {
-        Logger.info(`Pedido ${idPedido} deletado.`)
+        Logger.info(`Documento ${idDocumento} deletado.`)
         Logger.info(dados)
         return dados
       })
@@ -44,8 +45,8 @@ class PedidoRepository {
       })
   }
 
-  public async showAll(sqlPedidos: string): Promise<PedidoBanco[]> {
-    return await knex.raw(sqlPedidos)
+  public async showAll(sqlDocumentos: string): Promise<DocumentoBanco[]> {
+    return await knex.raw(sqlDocumentos)
       .then((dados) => {
         return dados[0]
       })
@@ -55,8 +56,8 @@ class PedidoRepository {
       })
   }
 
-  public async update(tenantId: string, idPedido: number[], update: object): Promise<number> {
-    return await knex('pedido').update({ ...update }).whereIn("idPedido", idPedido).where({ tenantId })
+  public async update(tenantId: string, idDocumento: number[], update: object): Promise<number> {
+    return await knex(documento).update({ ...update }).whereIn("idDocumento", idDocumento).where({ tenantId })
       .then((dados) => {
         return dados
       })
@@ -79,4 +80,4 @@ class PedidoRepository {
 
 }
 
-export default PedidoRepository
+export default DocumentoRepository

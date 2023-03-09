@@ -1,16 +1,16 @@
 import AppError from '@shared/erros/AppError'
-import proximoNumeroPedido from "@shared/queries/proximoNumeroPedido"
-import PedidoRepository from '../repositories/PedidoRepository'
+import proximoNumeroDocumento from "@shared/queries/proximoNumeroDocumento"
+import DocumentoRepository from '../repositories/DocumentoRepository'
 
 class ProximoNumeroService {
   public async execute(tenantId: string): Promise<any> {
-    const sqlProximoNumero = `${proximoNumeroPedido.proximoNumero} where tenantId = ${tenantId}`
+    const sqlProximoNumero = `${proximoNumeroDocumento.proximoNumero} where tenantId = ${tenantId}`
 
-    const pedidoRepository = new PedidoRepository()
+    const documentoRepository = new DocumentoRepository()
 
-    const proximoNumero = await pedidoRepository.proximoNumero(sqlProximoNumero)
+    const proximoNumero = await documentoRepository.proximoNumero(sqlProximoNumero)
 
-    if (!proximoNumero) throw new AppError('Não foi possível obter o número do pedido.')
+    if (!proximoNumero) throw new AppError('Não foi possível obter o número do documento.')
 
     return proximoNumero
   }

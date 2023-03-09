@@ -1,5 +1,5 @@
-class ProdutosPedido {
-  idPedido?: number
+class ProdutosDocumento {
+  idDocumento?: number
   idProduto: number
   tenantId?: string
   observacao: string
@@ -10,4 +10,4 @@ class ProdutosPedido {
   updated_at?: Date
 }
 
-export default ProdutosPedido
+export default ProdutosDocumento

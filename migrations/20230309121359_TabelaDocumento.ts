@@ -23,7 +23,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
     tabela.unique(['numeroDocumento', 'tenantId'])
     tabela.string('email', 168)
-    tabela.integer('tipodDocumento').notNullable().unsigned().defaultTo(1)
+    tabela.integer('tipoDocumento').notNullable().unsigned().defaultTo(1)
     tabela.string('planoPagamento', 48)
     tabela.string('telefone', 24)
     tabela.string('cep', 8)

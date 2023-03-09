@@ -1,4 +1,4 @@
-interface clientePedido {
+interface clienteDocumento {
   cliente: string
   documento: string
   email: string
@@ -10,7 +10,7 @@ interface clientePedido {
   cep: string
 }
 
-interface entregaPedido {
+interface entregaDocumento {
   endereco: string
   bairro: string
   cidade: string
@@ -18,12 +18,12 @@ interface entregaPedido {
   cep: string
 }
 
-interface vendedorPedido {
+interface vendedorDocumento {
   vendedor: string
   idVendedor: string
 }
 
-interface produtosPedido {
+interface produtosDocumento {
   codigo: number
   descricao: string
   quantidade: number
@@ -31,18 +31,18 @@ interface produtosPedido {
   desconto: number
 }
 
-class Pedido {
-  idPedido: number
+class Documento {
+  idDocumento: number
   dataEmissao: Date
   dataPrevisaoEntrega: Date
   observacoes: string
   importado: boolean
   planoPagamento: string
-  cliente: clientePedido
-  entrega: entregaPedido
-  vendedor: vendedorPedido
-  produtos: produtosPedido[]
-  totalPedido: number
+  cliente: clienteDocumento
+  entrega: entregaDocumento
+  vendedor: vendedorDocumento
+  produtos: produtosDocumento[]
+  totalDocumento: number
 }
 
-export default Pedido
+export default Documento

@@ -1,37 +1,37 @@
 import AppError from '@shared/erros/AppError'
-import sqlPedidos from "@shared/queries/pedidoCompleto"
-import PedidoExport from '../entities/PedidoExport'
-import PedidoBanco from '../entities/PedidoBanco'
-import PedidoRepository from '../repositories/PedidoRepository'
+import sqlDocumentos from "@shared/queries/documentoCompleto"
+import DocumentoExport from '../entities/DocumentoExport'
+import DocumentoBanco from '../entities/DocumentoBanco'
+import DocumentoRepository from '../repositories/DocumentoRepository'
 
-class ShowAllPedidosService {
-  public async execute(tenantId: string, importado: boolean): Promise<PedidoExport[]> {
+class ShowAllDocumentosService {
+  public async execute(tenantId: string, importado: boolean): Promise<DocumentoExport[]> {
 
-    const sqlConsultaPedidos = `${sqlPedidos.pedidos}
+    const sqlConsultaDocumentos = `${sqlDocumentos.documentos}
       and p.importado = ${importado}
       and pp.tenantId = ${tenantId}
        `
 
-    const pedidoRepository = new PedidoRepository()
+    const documentoRepository = new DocumentoRepository()
 
-    const pedidos = await pedidoRepository.showAll(sqlConsultaPedidos)
+    const documentos = await documentoRepository.showAll(sqlConsultaDocumentos)
 
-    if (!pedidos) throw new AppError('Nenhum pedido encontrado.')
+    if (!documentos) throw new AppError('Nenhum documento encontrado.')
 
-    const factorPedidos = await this.montaPedido(pedidos)
+    const factorDocumentos = await this.montaDocumentosExportacao(documentos)
 
-    const pedidoTotalizado = await this.calculaTotal(factorPedidos).then()
+    const documentoTotalizado = await this.calculaTotal(factorDocumentos).then()
 
-    return pedidoTotalizado
+    return documentoTotalizado
   }
 
-  async montaPedido (pedidosBanco: PedidoBanco[]): Promise<PedidoExport[]> {
+  async montaDocumentosExportacao (documentosBanco: DocumentoBanco[]): Promise<DocumentoExport[]> {
     const referencia: any = []
-    pedidosBanco.reduce((p: any, ped) => {
-      if (!p[ped.idPedido]) {
-        p[ped.idPedido] = {
-          idPedido: ped.idPedido,
-          numeroPedido: ped.numeroPedido,
+    documentosBanco.reduce((p: any, ped) => {
+      if (!p[ped.idDocumento]) {
+        p[ped.idDocumento] = {
+          idDocumento: ped.idDocumento,
+          numeroDocumento: ped.numeroDocumento,
           dataEmissao: ped.dataEmissao,
           dataPrevisaoEntrega: ped.dataPrevisaoEntrega,
           observacoes: !ped.observacoes ? '' : ped.observacoes,
@@ -61,9 +61,9 @@ class ShowAllPedidosService {
           },
           produtos: []
         }
-        referencia.push(p[ped.idPedido])
+        referencia.push(p[ped.idDocumento])
       }
-      p[ped.idPedido].produtos.push({
+      p[ped.idDocumento].produtos.push({
         codigo: ped.codigo,
         descricao: ped.descricao,
         quantidade: ped.quantidade,
@@ -76,17 +76,17 @@ class ShowAllPedidosService {
     return referencia
   }
 
-  async calculaTotal (pedidos: any): Promise<any> {
-    pedidos.forEach((p: any )=> {
-      p.totalPedido = p.produtos.reduce(this.totalPedido, 0)
+  async calculaTotal (documentos: any): Promise<any> {
+    documentos.forEach((p: any )=> {
+      p.totalDocumento = p.produtos.reduce(this.totalDocumento, 0)
     })
 
-    return pedidos
+    return documentos
   }
 
-  totalPedido (total: number, item: any) {
+  totalDocumento (total: number, item: any) {
     return total + (item.valorUnitario * item.quantidade)
   }
 }
 
-export default ShowAllPedidosService
+export default ShowAllDocumentosService

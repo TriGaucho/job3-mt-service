@@ -1,5 +1,5 @@
 export default {
-  pedidos: `SELECT
+  documentos: `SELECT
     pp.idPedido,
     p.numeroPedido,
     c.nome AS cliente,
