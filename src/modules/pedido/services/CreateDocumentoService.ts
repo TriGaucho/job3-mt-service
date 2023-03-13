@@ -1,5 +1,6 @@
 import CreateClienteService from '@modules/pessoa/services/CreateClienteService'
 import AppError from '@shared/erros/AppError'
+import RemoveMascara from '@shared/utils/removeMascaraCPF'
 import Documento from '../entities/Documento'
 import ProdutosDocumento from '../entities/ProdutosDocumento'
 import DocumentoRepository from '../repositories/DocumentoRepository'
@@ -21,7 +22,7 @@ class CreateDocumentoService {
     if (!dadosDocumento.numeroDocumento) {
       const proximoNumeroService = new ProximoNumeroService()
       const numero = await proximoNumeroService.execute(tenantId)
-      dadosDocumento.numeroDocumento = numero.proximoNumero
+      dadosDocumento.numeroDocumento = !numero.proximoNumero ? 1 : numero.proximoNumero
     }
 
     const idDocumento = await documentoRepository.createDocumento({ ...dadosDocumento, tenantId })
@@ -47,9 +48,10 @@ class CreateDocumentoService {
   async createCliente(tenantId: string, dadosCliente: iCliente, dadosDocumento: Documento): Promise<number> {
     const createClienteService = new CreateClienteService()
 
+    const { clienteCpf, clienteNome} = dadosCliente
     const { telefone, cep, logradouro, bairro, cidade, uf } = dadosDocumento
-
-    const cliente = { ...dadosCliente, telefone, cep, logradouro, bairro, cidade, uf }
+    const cpf = await RemoveMascara(clienteCpf)
+    const cliente = { clienteNome, clienteCpf: cpf , telefone, cep, logradouro, bairro, cidade, uf }
 
     return await createClienteService.execute(tenantId, cliente)
   }
