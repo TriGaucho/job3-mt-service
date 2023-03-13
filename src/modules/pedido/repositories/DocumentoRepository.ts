@@ -56,8 +56,8 @@ class DocumentoRepository {
       })
   }
 
-  public async update(tenantId: string, idDocumento: number[], update: object): Promise<number> {
-    return await knex(documento).update({ ...update }).whereIn("idDocumento", idDocumento).where({ tenantId })
+  public async update(tenantId: string, idDocumento: number, importado: number): Promise<number> {
+    return await knex(documento).update({ importado }).where({ tenantId, idDocumento })
       .then((dados) => {
         return dados
       })

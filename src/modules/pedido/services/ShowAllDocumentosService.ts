@@ -31,6 +31,7 @@ class ShowAllDocumentosService {
       if (!p[ped.idDocumento]) {
         p[ped.idDocumento] = {
           idDocumento: ped.idDocumento,
+          tipoDocumento: ped.tipoDocumento,
           numeroDocumento: ped.numeroDocumento,
           dataEmissao: ped.dataEmissao,
           dataPrevisaoEntrega: ped.dataPrevisaoEntrega,

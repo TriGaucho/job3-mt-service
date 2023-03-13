@@ -31,7 +31,8 @@ SELECT
     pp.quantidade,
     pp.valorUnidade,
     pp.desconto,
-    p.planoPagamento
+    p.planoPagamento,
+    p.tipoDocumento
 FROM
 		produtosDocumento pp
         INNER JOIN documento AS p ON p.idDocumento = pp.idDocumento
