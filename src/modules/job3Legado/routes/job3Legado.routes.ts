@@ -9,7 +9,7 @@ empresaRouter.post('/produto/:tenantId', job3LegadoController.importProdutos)
 empresaRouter.post('/pessoa/:tenantId', job3LegadoController.importPessoas)
 empresaRouter.post('/usuario/:tenantId', job3LegadoController.importUsuarios)
 empresaRouter.post('/planopagamento/:tenantId', job3LegadoController.importPlanosPagamento)
-empresaRouter.get('/pedidos/:tenantId', job3LegadoController.exportaPedidos)
-empresaRouter.put('/pedidos/:tenantId/:importado', job3LegadoController.updatePedido)
+empresaRouter.get('/documentos/:tenantId', job3LegadoController.exportaDocumentos)
+empresaRouter.put('/documentos/:tenantId/:importado', job3LegadoController.updateDocumento)
 
 export default empresaRouter

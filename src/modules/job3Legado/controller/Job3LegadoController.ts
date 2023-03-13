@@ -3,8 +3,8 @@ import ImportaProdutosService from '../services/ImportaProdutosService'
 import ImportaPessoasService from '../services/ImportaPessoasService'
 import ImportaUsuariosService from '../services/ImportaUsuariosService'
 import ImportaPlanosPagamentoService from '../services/ImportaPlanosPagamentoService'
-import ExportaPedidosService from '../services/ExportaPedidosService'
-import UpdatePedidoService from '../services/UpdatePedidoService'
+import ExportaDocumentoService from '../services/ExportaDocumentoService'
+import UpdateDocumentoService from '../services/UpdateDocumentoService'
 
 export default class Job3LegadoController {
   public async importProdutos(req: Request, res: Response): Promise<Response> {
@@ -47,22 +47,22 @@ export default class Job3LegadoController {
     return res.json(planosPagamento)
   }
 
-  public async exportaPedidos(req: Request, res: Response): Promise<Response> {
+  public async exportaDocumentos(req: Request, res: Response): Promise<Response> {
     const { tenantId } = req.params
 
-    const exportaPedidosService = new ExportaPedidosService()
-    const pedidos = await exportaPedidosService.execute(tenantId)
+    const exportaDocumentoService = new ExportaDocumentoService()
+    const documentos = await exportaDocumentoService.execute(tenantId)
 
-    return res.json(pedidos)
+    return res.json(documentos)
   }
 
-  public async updatePedido(req: Request, res: Response): Promise<Response> {
+  public async updateDocumento(req: Request, res: Response): Promise<Response> {
     const { tenantId, importado } = req.params
-    const { pedidos } = req.body
+    const { documento } = req.body
 
-    const updatePedidoService = new UpdatePedidoService()
-    const updatePedido = await updatePedidoService.execute(tenantId, pedidos, { importado })
+    const updateDocumentoService = new UpdateDocumentoService()
+    const updateDocumento = await updateDocumentoService.execute(tenantId, documento, { importado })
 
-    return res.json(updatePedido)
+    return res.json(updateDocumento)
   }
 }

@@ -31,7 +31,7 @@ class CreateDocumentoService {
     const produtosDoDocumento = await this.insertIdDocumentoProdutos(idDocumento, tenantId, produtosDocumento)
     const produtos = await documentoRepository.createProdutosDocumento(produtosDoDocumento, idDocumento)
 
-    if (!produtos) throw new AppError(`Não foi possível adastrar os produtos do pedido ${idDocumento}.`)
+    if (!produtos) throw new AppError(`Não foi possível adastrar os produtos do documento ${idDocumento}.`)
 
     return idDocumento
   }
@@ -44,10 +44,10 @@ class CreateDocumentoService {
     return produtos
   }
 
-  async createCliente(tenantId: string, dadosCliente: iCliente, dadosPedido: Documento): Promise<number> {
+  async createCliente(tenantId: string, dadosCliente: iCliente, dadosDocumento: Documento): Promise<number> {
     const createClienteService = new CreateClienteService()
 
-    const { telefone, cep, logradouro, bairro, cidade, uf } = dadosPedido
+    const { telefone, cep, logradouro, bairro, cidade, uf } = dadosDocumento
 
     const cliente = { ...dadosCliente, telefone, cep, logradouro, bairro, cidade, uf }
 

@@ -1,7 +1,7 @@
-export const documentosSql = `
-SELECT
-    pp.idDocumento,
-    p.numeroDocumento AS numeroPedido,
+export default {
+  documentos: `SELECT
+    pp.idPedido,
+    p.numeroPedido,
     c.nome AS cliente,
     c.idPessoa AS idCliente,
     c.cpfCnpj AS documentoCliente,
@@ -32,10 +32,16 @@ SELECT
     pp.valorUnidade,
     pp.desconto,
     p.planoPagamento
-FROM
-		produtosDocumento pp
-        INNER JOIN documento AS p ON p.idDocumento = pp.idDocumento
-        INNER JOIN pessoa AS c ON c.idPessoa = p.cliente
-        LEFT JOIN usuario AS v ON v.docUsuario = p.docUsuario
-        INNER JOIN produto AS pr ON pr.idProduto = pp.idProduto
+  FROM
+    produtosPedido pp,
+    pedido p,
+    pessoa c,
+    usuario v,
+    produto pr
+  WHERE
+    pp.idPedido = p.idPedido
+    AND pp.idProduto = pr.idProduto
+    AND p.cliente = c.idPessoa
+    AND p.docUsuario = v.docUsuario
     `
+}

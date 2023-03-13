@@ -1,5 +1,5 @@
 import AppError from '@shared/erros/AppError'
-import sqlDocumentos from "@shared/queries/documentoCompleto"
+import {documentosSql} from "@shared/queries/documentoCompleto"
 import DocumentoExport from '../entities/DocumentoExport'
 import DocumentoBanco from '../entities/DocumentoBanco'
 import DocumentoRepository from '../repositories/DocumentoRepository'
@@ -7,7 +7,7 @@ import DocumentoRepository from '../repositories/DocumentoRepository'
 class ShowAllDocumentosService {
   public async execute(tenantId: string, importado: boolean): Promise<DocumentoExport[]> {
 
-    const sqlConsultaDocumentos = `${sqlDocumentos.documentos}
+    const sqlConsultaDocumentos = `${documentosSql}
       and p.importado = ${importado}
       and pp.tenantId = ${tenantId}
        `
@@ -56,8 +56,8 @@ class ShowAllDocumentosService {
             cep: !ped.logradouroEntrega ? ped.cepCliente : ped.cepEntrega
           },
           vendedor: {
-            vendedor: ped.vendedor,
-            idVendedor: ped.documentoVendedor
+            vendedor: !ped.vendedor ? '' : ped.vendedor,
+            idVendedor: !ped.documentoVendedor ? '' : ped.documentoVendedor
           },
           produtos: []
         }
