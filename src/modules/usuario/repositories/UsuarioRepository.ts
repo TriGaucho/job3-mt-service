@@ -4,8 +4,8 @@ import Logger from "@shared/logger/Logger"
 import Usuario from '../entities/Usuario'
 
 class UsuarioRepository {
-  public async create(usuario: Usuario): Promise<number> {
-    return await knex('usuario').insert(usuario).returning('idUsuario')
+  public async create(usuario: Usuario[]): Promise<number> {
+    return await knex('usuario').insert(usuario).onConflict().merge()
       .then((dados) => {
         Logger.info(dados[0])
         return dados[0]
