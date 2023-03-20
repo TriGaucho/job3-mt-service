@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import ShowAllPessoaService from '../services/ShowAllPessoaService'
 import FindClienteService from '../services/FindClienteService'
 import CreateClienteService from '../services/CreateClienteService'
+import FindClientesPorVendedorService from '../services/FindClientesPorVendedorService'
 
 export default class PessoaController {
   public async showAll(req: Request, res: Response): Promise<Response> {
@@ -20,6 +21,16 @@ export default class PessoaController {
     const dadosCliente = await findClienteService.execute({tenantId, cpfCnpj: cliente} )
 
     return res.json(dadosCliente)
+  }
+
+  public async findClientesPorVendedor(req: Request, res: Response): Promise<Response> {
+    const { tenantId } = req.params
+    const { idVendedor } = req.usuario
+    const findClientesPorVendedorService = new FindClientesPorVendedorService()
+
+    const clientes = await findClientesPorVendedorService.execute(tenantId, idVendedor)
+
+    return res.json(clientes)
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
