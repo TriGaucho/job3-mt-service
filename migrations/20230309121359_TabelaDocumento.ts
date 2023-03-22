@@ -5,7 +5,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable('documento', (tabela) => {
     tabela.increments('idDocumento').primary()
-    tabela.integer('numeroDocumento').notNullable().unsigned()
+    tabela.integer('numeroDocumento').unsigned()
     tabela.string('tenantId', 14).notNullable()
     tabela.foreign('tenantId')
       .references('empresa.cnpj')
@@ -16,8 +16,11 @@ exports.up = function (knex) {
       .references('pessoa.idPessoa')
       .onDelete('RESTRICT')
       .onUpdate('CASCADE')
-    tabela.string('docUsuario', 11).notNullable().unsigned().defaultTo('00000000000')
-    tabela.unique(['numeroDocumento', 'tenantId'])
+    tabela.integer('idUsuario', 11).unsigned()
+    tabela.foreign('idUsuario')
+    .references('usuario.idUsuario')
+    .onDelete('RESTRICT')
+    .onUpdate('CASCADE')
     tabela.string('email', 168)
     tabela.integer('tipoDocumento').notNullable().unsigned().defaultTo(1)
     tabela.string('planoPagamento', 48)
@@ -31,6 +34,7 @@ exports.up = function (knex) {
     tabela.date('dataEntrega')
     tabela.date('dataPrevisaoEntrega')
     tabela.timestamps(true, true)
+    tabela.unique(['numeroDocumento', 'tenantId', 'tipoDocumento'])
     tabela.boolean('importado').defaultTo(false)
   })
 }

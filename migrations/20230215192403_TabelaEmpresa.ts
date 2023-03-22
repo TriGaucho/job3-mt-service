@@ -17,6 +17,8 @@ exports.up = function up (knex) {
     tabela.string('uf', 2).notNullable()
     tabela.integer('qtdUsuarios').notNullable().unsigned()
     tabela.boolean('ativo').defaultTo(true)
+    //TODO validar no cadastro da EMPRESA
+    tabela.boolean('possuiPedido').defaultTo(false)
     tabela.timestamps(true, true)
   })
 }
