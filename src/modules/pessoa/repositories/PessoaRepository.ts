@@ -30,7 +30,7 @@ class PessoaRepository {
   }
 
   public async findClientesPorVendedor(tenantId: string, docUsuario: string): Promise<Pessoa[]| void> {
-    return await knex(pessoa).where({ tenantId, docUsuario, idTipoPessoa: 2, ativo: true })
+    return await knex(pessoa).where({ tenantId, docUsuario, idTipoPessoa: 1, ativo: true })
       .then((dados) => {
         Logger.info(dados)
         return dados

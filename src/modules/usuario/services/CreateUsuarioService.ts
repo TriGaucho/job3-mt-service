@@ -1,15 +1,14 @@
-import bcrypt from 'bcryptjs'
-
 import AppError from '@shared/erros/AppError'
 import Usuario from '../entities/Usuario'
 import UsuarioRepository from '../repositories/UsuarioRepository'
 import InsereTenantId from '@shared/utils/insereTenantId'
+import HashSenha from '@shared/utils/HashSenha'
 
 class CreateUsuarioService {
   public async execute(usuario: Usuario[], tenantId: string): Promise<number> {
     const usuarioRepository = new UsuarioRepository()
 
-    await this.hasSenha(usuario)
+    await HashSenha(usuario)
 
     await InsereTenantId(usuario, tenantId)
 
@@ -18,15 +17,6 @@ class CreateUsuarioService {
     if (!novoUsuario) throw new AppError('Não foi possível cadastrar o usuário.')
 
     return novoUsuario
-  }
-
-  async hasSenha (usuario: Usuario[]): Promise<any> {
-    const salt = await bcrypt.genSaltSync(10)
-    return usuario.map((u) => {
-      u.senha = bcrypt.hashSync(u.senha, salt)
-      return u
-    }
-    )
   }
 }
 
