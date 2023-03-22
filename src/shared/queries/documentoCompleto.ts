@@ -37,6 +37,6 @@ FROM
 		produtosDocumento pp
         INNER JOIN documento AS p ON p.idDocumento = pp.idDocumento
         INNER JOIN pessoa AS c ON c.idPessoa = p.cliente
-        LEFT JOIN usuario AS v ON v.docUsuario = p.docUsuario
+        LEFT JOIN usuario AS v ON v.idUsuario = p.idUsuario
         INNER JOIN produto AS pr ON pr.idProduto = pp.idProduto
     `
