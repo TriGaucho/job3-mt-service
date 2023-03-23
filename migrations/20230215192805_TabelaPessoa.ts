@@ -6,10 +6,6 @@ exports.up = function (knex) {
   return knex.schema.createTable('pessoa', (tabela) => {
     tabela.increments('idPessoa').primary()
     tabela.string('docUsuario', 11)
-    tabela.foreign('docUsuario')
-      .references('usuario.docUsuario')
-      .onDelete('RESTRICT')
-      .onUpdate('CASCADE')
     tabela.string('nome', 168).notNullable()
     tabela.string('segundoNome', 168)
     tabela.string('cpfCnpj', 14).notNullable()
