@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import CreateDocumentoService from '../services/CreateDocumentoService'
 import ProximoNumeroService from '../services/ProximoNumeroService'
 import ShowHeadersDocumentosService from '../services/ShowHeadersDocumentosService'
+import FindOneDocumentoService from '../services/FindOneDocumentoService'
 
 export default class DocumentoController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -33,6 +34,16 @@ export default class DocumentoController {
 
     return res.json(documentos)
   }
+
   //TODO detalhesPedido
+  public async detalhesDocumento(req: Request, res: Response): Promise<Response> {
+    const { tenantId, idDocumento } = req.params
+
+    const findOneDocumentoService = new FindOneDocumentoService()
+    const documentos = await findOneDocumentoService.execute(tenantId, parseInt(idDocumento))
+
+    return res.json(documentos)
+  }
+
   //TODO atualiza status pedido
 }

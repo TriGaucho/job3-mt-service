@@ -45,7 +45,7 @@ class DocumentoRepository {
       })
   }
 
-  public async showAll(sqlDocumentos: string): Promise<DocumentoBanco[]> {
+  public async documentDetails(sqlDocumentos: string): Promise<DocumentoBanco[]> {
     return await knex.raw(sqlDocumentos)
       .then((dados) => {
         return dados[0]

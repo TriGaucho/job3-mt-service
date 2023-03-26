@@ -4,12 +4,12 @@ import DocumentoExport from '../entities/DocumentoExport'
 import DocumentoBanco from '../entities/DocumentoBanco'
 import DocumentoRepository from '../repositories/DocumentoRepository'
 
-class ShowAllDocumentosService {
-  public async execute(tenantId: string, importado: boolean): Promise<DocumentoExport[]> {
+class FindOneDocumentoService {
+  public async execute(tenantId: string, idDocumento: number): Promise<DocumentoExport[]> {
 
     const sqlConsultaDocumentos = `${documentosSql}
-      and p.importado = ${importado}
       and pp.tenantId = ${tenantId}
+      and pp.idDocumento = ${idDocumento}
        `
 
     const documentoRepository = new DocumentoRepository()
@@ -25,6 +25,7 @@ class ShowAllDocumentosService {
     return documentoTotalizado
   }
 
+  //TODO tornar função UTILS
   async montaDocumentosExportacao (documentosBanco: DocumentoBanco[]): Promise<DocumentoExport[]> {
     const referencia: any = []
     documentosBanco.reduce((p: any, ped) => {
@@ -90,4 +91,4 @@ class ShowAllDocumentosService {
   }
 }
 
-export default ShowAllDocumentosService
+export default FindOneDocumentoService
