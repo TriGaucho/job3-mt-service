@@ -1,6 +1,9 @@
 import { Router } from 'express'
-import ValidaSessaoMiddleware from '@shared/middlewares/validaSessoa.middlewares'
+import 'dotenv/config'
 
+
+import config from '@config/config'
+import ValidaSessaoMiddleware from '@shared/middlewares/validaSessoa.middlewares'
 import empresaRouter from '@modules/empresa/routes/empresa.routes'
 import usuarioRouter from '@modules/usuario/routes/usuario.routes'
 import pessoaRouter from '@modules/pessoa/routes/pessoa.routes'
@@ -11,7 +14,13 @@ import documento from '@modules/pedido/routes/documento.routes'
 import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
 
+const versao = config.versao
+
 const routes = Router()
+
+routes.get('/', (request, response) => {
+  return response.json({ message: versao });
+})
 
 //TODO criar um middlware para validar tenantId
 routes.use('/legadojob3', job3LegadoRouter)

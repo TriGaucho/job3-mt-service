@@ -31,11 +31,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(routes)
 
-routes.get('/', (request, response) => {
-  return response.json({ message: versao });
-})
-
-
 // Middleware de interceptação de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
