@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import CreateDocumentoService from '../services/CreateDocumentoService'
 import ProximoNumeroService from '../services/ProximoNumeroService'
+import ShowHeadersDocumentosService from '../services/ShowHeadersDocumentosService'
 
 export default class DocumentoController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -23,6 +24,15 @@ export default class DocumentoController {
   }
 
   //TODO cabeçalho
+  public async headersDocumentos(req: Request, res: Response): Promise<Response> {
+    const { tenantId } = req.params
+    const { idUsuario } = req.usuario
+
+    const showHeadersDocumentosService = new ShowHeadersDocumentosService()
+    const documentos = await showHeadersDocumentosService.execute(tenantId, idUsuario)
+
+    return res.json(documentos)
+  }
   //TODO detalhesPedido
   //TODO atualiza status pedido
 }

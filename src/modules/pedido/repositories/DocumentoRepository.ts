@@ -78,6 +78,23 @@ class DocumentoRepository {
       })
   }
 
+  public async showHeaders(tenantId: string, idUsuario: number): Promise<any> {
+    return await knex(documento)
+      .join('pessoa AS cli', 'cli.idPessoa', 'documento.cliente')
+      .join('usuario AS ven', 'ven.idUsuario', 'documento.idUsuario')
+      .select('ven.nome', 'cli.nome', 'documento.*')
+      .where({ 'documento.tenantId': tenantId, 'documento.idUsuario': idUsuario })
+      .then((dados) => {
+        return dados
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+
+
 }
 
 export default DocumentoRepository
