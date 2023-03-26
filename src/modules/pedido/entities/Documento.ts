@@ -3,7 +3,7 @@ class Documento {
   numeroDocumento: number
   tenantId: string
   cliente?: number
-  docUsuario: string
+  idUsuario?: number
   email?: string
   planoPagamento?: string
   telefone: string

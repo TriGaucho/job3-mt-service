@@ -2,8 +2,8 @@
 declare namespace Express {
   export interface Request {
     usuario: {
-      idVendedor: string
       idUsuario: number
+      docUsuario: string
       nome: string
       emp: string
       nivel: number

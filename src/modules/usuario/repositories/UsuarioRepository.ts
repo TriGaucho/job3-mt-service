@@ -1,11 +1,12 @@
+import { usuario } from "@shared/consts/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Usuario from '../entities/Usuario'
 
 class UsuarioRepository {
-  public async create(usuario: Usuario[]): Promise<number> {
-    return await knex('usuario').insert(usuario).onConflict().merge()
+  public async create(dados: Usuario[]): Promise<number> {
+    return await knex(usuario).insert(dados).onConflict().merge()
       .then((dados) => {
         Logger.info(dados[0])
         return dados[0]
@@ -16,8 +17,8 @@ class UsuarioRepository {
       })
   }
 
-  public async show(idUsuario: number): Promise<Usuario | undefined> {
-    return await knex('usuario').where({ idUsuario })
+  public async showDocUsaurio(idUsuario: number): Promise<string> {
+    return await knex(usuario).select('docUsuario').where({ idUsuario })
       .then((dados) => {
         Logger.info(dados[0])
         return dados[0]
@@ -29,7 +30,7 @@ class UsuarioRepository {
   }
 
   public async showAll(tenantId: string): Promise<Usuario[] | void> {
-    return await knex('usuario').where({ tenantId })
+    return await knex(usuario).where({ tenantId })
       .then((dados) => {
         Logger.info(dados)
         return dados
