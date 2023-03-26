@@ -8,7 +8,7 @@ class ShowAllProdutosService {
 
     const produtos = await produtoRepository.showAll(tenantId)
 
-    if (!produtos) throw new AppError('Nenhuma empresa encontrada.')
+    if (!produtos) throw new AppError('Nenhum prduto encontrado.')
 
     return produtos
   }
