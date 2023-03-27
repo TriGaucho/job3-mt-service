@@ -14,7 +14,7 @@ interface iCliente {
 }
 
 class CreateClienteService {
-  public async execute(tenantId: string, cliente: iCliente, dadosEndereco: any): Promise<number> {
+  public async execute(tenantId: string, cliente: iCliente): Promise<number> {
     const pessoaRepository = new PessoaRepository()
 
     const dadosCliente = await this.transformPessoa(tenantId, cliente)

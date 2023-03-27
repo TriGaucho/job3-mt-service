@@ -25,7 +25,14 @@ class CreateDocumentoService {
       dadosDocumento.numeroDocumento = !numero.proximoNumero ? 1 : numero.proximoNumero
     }
 
-    const idDocumento = await documentoRepository.createDocumento({ ...dadosDocumento, tenantId })
+    const cepSemMascara = await RemoveMascara(dadosDocumento.cep)
+    const foneSemMascara = await RemoveMascara(dadosDocumento.telefone)
+
+    const idDocumento = await documentoRepository.createDocumento({
+      ...dadosDocumento,
+      cep: cepSemMascara,
+      telefone: foneSemMascara,
+      tenantId })
 
     if (!idDocumento) throw new AppError('Não foi possível criar o documento.')
 
@@ -50,8 +57,10 @@ class CreateDocumentoService {
 
     const { clienteCpf, clienteNome} = dadosCliente
     const { telefone, cep, logradouro, bairro, cidade, uf } = dadosDocumento
+    const cepSemMascara = await RemoveMascara(cep)
     const cpf = await RemoveMascara(clienteCpf)
-    const cliente = { clienteNome, clienteCpf: cpf , telefone, cep, logradouro, bairro, cidade, uf }
+    const fone = await RemoveMascara(telefone)
+    const cliente = { clienteNome, clienteCpf: cpf , telefone: fone, cep: cepSemMascara, logradouro, bairro, cidade, uf }
 
     return await createClienteService.execute(tenantId, cliente)
   }
