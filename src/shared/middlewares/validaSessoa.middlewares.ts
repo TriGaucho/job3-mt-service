@@ -18,8 +18,6 @@ interface ITokenPayload {
 
 
 export default async function ValidaSessao(req: Request, res: Response, next: NextFunction) {
-
-  // const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
   const authHeader = req.headers.authorization
 
   if (!authHeader) {
@@ -29,7 +27,7 @@ export default async function ValidaSessao(req: Request, res: Response, next: Ne
   const [, token] = authHeader.split(' ')
 
   try {
-    const decodedToken = await verify(token, authConfig.jwt.secret as Secret)
+    const decodedToken = verify(token, authConfig.jwt.secret as Secret)
 
     const decoded = decodedToken as ITokenPayload
 
