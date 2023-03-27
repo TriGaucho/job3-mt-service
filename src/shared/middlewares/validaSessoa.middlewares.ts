@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify, Secret } from 'jsonwebtoken'
-import SECRET from '@config/config'
+import jwt from '@config/config'
 import AppError from '@shared/erros/AppError'
+import Logger from '@shared/logger/Logger'
 
-const CHAVE = SECRET.jwt as string
+const CHAVE = jwt.jwt as string
 
 
 interface ITokenPayload {
@@ -41,6 +42,7 @@ export default async function ValidaSessao(req: Request, res: Response, next: Ne
     }
     return next()
   } catch (error) {
+    Logger.error({mensagem: 'Token inválido!', error})
     throw new AppError('Token inválido!');
   }
 
