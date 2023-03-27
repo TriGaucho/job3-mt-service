@@ -24,8 +24,8 @@ export default class PessoaController {
   }
 
   public async findClientesPorVendedor(req: Request, res: Response): Promise<Response> {
-    const { tenantId } = req.params
-    const { docUsuario } = req.usuario
+    const { tenantId, docUsuario } = req.params
+
     const findClientesPorVendedorService = new FindClientesPorVendedorService()
 
     const clientes = await findClientesPorVendedorService.execute(tenantId, docUsuario)

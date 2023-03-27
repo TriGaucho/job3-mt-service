@@ -1,4 +1,3 @@
-import UsuarioRepository from "@modules/usuario/repositories/UsuarioRepository"
 import AppError from "@shared/erros/AppError"
 import PessoaRepository from "../repositories/PessoaRepository"
 

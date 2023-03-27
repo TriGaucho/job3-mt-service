@@ -5,7 +5,7 @@ const pessoaRouter = Router()
 
 const pessoaController = new PessoaController()
 
-pessoaRouter.get('/clientes/:tenantId', pessoaController.findClientesPorVendedor)
+pessoaRouter.get('/clientes/:tenantId/:docUsuario', pessoaController.findClientesPorVendedor)
 pessoaRouter.get('/:tenantId', pessoaController.showAll)
 
 export default pessoaRouter
