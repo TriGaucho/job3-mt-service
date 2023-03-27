@@ -8,7 +8,7 @@ const CHAVE = SECRET.jwt as string
 
 interface ITokenPayload {
   idUsuario: number
-  docVendedor: string
+  docUsuario: string
   nome: string
   emp: string
   nivel: number
@@ -32,7 +32,7 @@ export default async function ValidaSessao(req: Request, res: Response, next: Ne
 
     req.usuario = {
       idUsuario: decoded.idUsuario,
-      docUsuario: decoded.docVendedor,
+      docUsuario: decoded.docUsuario,
       nome: decoded.nome,
       emp: decoded.emp,
       nivel: decoded.nivel,
