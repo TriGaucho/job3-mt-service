@@ -17,11 +17,14 @@ class UsuarioRepository {
       })
   }
 
-  public async showDocUsaurio(idUsuario: number): Promise<string> {
-    return await knex(usuario).select('docUsuario').where({ idUsuario })
+  public async findUsuario(usuario: string, ambiente: string): Promise<any> {
+    return await await knex('usuario as U').where({ usuario, ambiente })
+      .innerJoin('empresa as E', 'E.cnpj', 'U.tenantId')
+      .select('U.idUsuario', 'U.docUsuario', 'U.nome', 'U.tenantId', 'U.nivel', 'U.senha', 'E.razaoSocial', 'E.fantasia')
+      .first()
       .then((dados) => {
-        Logger.info(dados[0])
-        return dados[0]
+        Logger.info(dados)
+        return dados
       })
       .catch(erro => {
         Logger.error(erro)

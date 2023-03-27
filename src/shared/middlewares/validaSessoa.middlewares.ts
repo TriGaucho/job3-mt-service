@@ -1,10 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
 import { verify, Secret } from 'jsonwebtoken'
-import jwt from '@config/config'
+import authConfig from '@config/auth'
 import AppError from '@shared/erros/AppError'
 import Logger from '@shared/logger/Logger'
-
-const CHAVE = jwt.jwt as string
 
 
 interface ITokenPayload {
@@ -28,7 +26,7 @@ export default async function ValidaSessao(req: Request, res: Response, next: Ne
   }
 
   try {
-    const decodedToken = verify(token, CHAVE as Secret)
+    const decodedToken = verify(token, authConfig as Secret)
     const decoded = decodedToken as ITokenPayload
 
     req.usuario = {

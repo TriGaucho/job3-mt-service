@@ -6,6 +6,7 @@ import config from '@config/config'
 import ValidaSessaoMiddleware from '@shared/middlewares/validaSessoa.middlewares'
 import empresaRouter from '@modules/empresa/routes/empresa.routes'
 import usuarioRouter from '@modules/usuario/routes/usuario.routes'
+import sessionsRouter from '@modules/usuario/routes/sessions.routes'
 import pessoaRouter from '@modules/pessoa/routes/pessoa.routes'
 import clientRouter from '@modules/pessoa/routes/cliente.routes'
 import produtoRouter from '@modules/produto/routes/produto.routes'
@@ -21,6 +22,8 @@ const routes = Router()
 routes.get('/', (request, response) => {
   return response.json({ message: versao });
 })
+
+routes.use('/login', sessionsRouter)
 
 //TODO criar um middlware para validar tenantId
 routes.use('/legadojob3', job3LegadoRouter)

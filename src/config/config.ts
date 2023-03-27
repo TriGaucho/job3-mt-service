@@ -20,6 +20,5 @@ export default {
       tableName: 'knex_migrations'
     }
   },
-  jwt: process.env.SECRET,
   modoSeguro: process.env.MODO_LOGIN
 }
