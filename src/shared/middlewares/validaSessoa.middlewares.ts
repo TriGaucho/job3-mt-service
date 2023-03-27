@@ -19,14 +19,18 @@ interface ITokenPayload {
 
 export default async function ValidaSessao(req: Request, res: Response, next: NextFunction) {
 
-  const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
+  // const token = req.headers.authorization ? req.headers.authorization.split(' ')[1] : null
+  const authHeader = req.headers.authorization
 
-  if (!token) {
-    throw new AppError('Sua sessão é inválida ou está expirada')
+  if (!authHeader) {
+    throw new AppError('JWT inválido ou expirada.');
   }
 
+  const [, token] = authHeader.split(' ')
+
   try {
-    const decodedToken = verify(token, authConfig as Secret)
+    const decodedToken = await verify(token, authConfig.jwt.secret as Secret)
+
     const decoded = decodedToken as ITokenPayload
 
     req.usuario = {

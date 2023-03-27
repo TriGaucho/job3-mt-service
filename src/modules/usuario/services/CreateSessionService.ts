@@ -29,7 +29,6 @@ class CreateSessionService {
     }
 
     const token = sign({}, authConfig.jwt.secret as Secret, {
-      subject: usuario.docUsuario,
       expiresIn: authConfig.jwt.expiresIn,
     });
 
