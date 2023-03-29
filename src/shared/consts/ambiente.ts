@@ -1,7 +1,7 @@
 import 'dotenv/config'
 
 export const ambiente = process.env.DB_AMBIENTE
-export const database =  ambiente === 'PRD' ? process.env.DATABASE_NAME_PRD : process.env.DATABASE_NAME_HML ;
-export const user =  ambiente === 'PRD' ? process.env.DATABASE_USER_PRD : process.env.DATABASE_USER_HML;
-export const password =  ambiente === 'PRD' ? process.env.DATABASE_PASS_PRD : process.env.DATABASE_PASS_HML;
-export const porta =  ambiente === 'PRD' ? process.env.PORT_PRD : process.env.PORT_HML;
+export const database =  process.env.DATABASE_NAME;
+export const user =  process.env.DATABASE_USER;
+export const password =  process.env.DATABASE_PASS;
+export const porta =  process.env.PORT;
