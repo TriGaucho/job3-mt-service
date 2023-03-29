@@ -1,3 +1,4 @@
+import { database, password, user } from '@shared/consts/ambiente'
 import 'dotenv/config'
 
 export default {
@@ -7,9 +8,9 @@ export default {
     client: process.env.DATABASE_CLIENT,
     connection: {
       host: process.env.DATABASE_HOST,
-      database: process.env.SERVICE_NAME,
-      user: process.env.SERVICE_USER,
-      password: process.env.SERVICE_PASS
+      database: database,
+      user: user,
+      password: process.env.DATABASE_PASS_HML
     },
     pool: {
       min: 2,
