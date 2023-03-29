@@ -2,7 +2,7 @@ import { database, password, user } from '@shared/consts/ambiente'
 import 'dotenv/config'
 
 export default {
-  versao: 20230327,
+  versao: 20230329,
   knex: {
     asyncStackTraces: true,
     client: process.env.DATABASE_CLIENT,
@@ -10,7 +10,7 @@ export default {
       host: process.env.DATABASE_HOST,
       database: database,
       user: user,
-      password: process.env.DATABASE_PASS_HML
+      password: password
     },
     pool: {
       min: 2,

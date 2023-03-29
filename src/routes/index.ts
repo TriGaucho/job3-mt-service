@@ -15,19 +15,14 @@ import planoPagamento from '@modules/planoPagamento/routes/planoPagamento.routes
 import documento from '@modules/pedido/routes/documento.routes'
 import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
-import { database, password, user } from '@shared/consts/ambiente'
 
 const versao = config.versao
-const dadosBanco = config.knex.connection
 const ambiente = process.env.DB_AMBIENTE
-
 const routes = Router()
 
 routes.get('/', (request, response) => {
   return response.json({
-    versao, ambiente, dadosBanco, database,
-    user,
-    password
+    versao, ambiente,
   });
 })
 
