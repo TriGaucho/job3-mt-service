@@ -8,9 +8,9 @@ import Logger from './shared/logger/Logger'
 
 import routes from './routes'
 import config from './config/config'
+import { porta } from '@shared/consts/ambiente'
 
 const app = express()
-const porta = process.env.PORT_SERVICE
 const versao = config.versao
 
 app.use(cors())
