@@ -1,5 +1,5 @@
 import 'dotenv/config'
 
 export default {
-  versao: 20230329
+  versao: 20230330
 }
