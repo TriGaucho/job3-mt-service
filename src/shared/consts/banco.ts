@@ -5,4 +5,4 @@ export const produto = 'produto';
 export const documento = 'documento';
 export const produtosDocumento = 'produtosDocumento';
 export const planoPagamento = 'planoPagamento';
-
+export const configuracoes = 'config';
