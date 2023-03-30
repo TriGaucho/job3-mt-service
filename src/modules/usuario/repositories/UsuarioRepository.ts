@@ -23,7 +23,6 @@ class UsuarioRepository {
       .select('U.idUsuario', 'U.docUsuario', 'U.nome', 'U.tenantId', 'U.nivel', 'U.senha', 'E.razaoSocial', 'E.fantasia')
       .first()
       .then((dados) => {
-        Logger.info(dados)
         return dados
       })
       .catch(erro => {

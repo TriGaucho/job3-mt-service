@@ -15,19 +15,23 @@ import planoPagamento from '@modules/planoPagamento/routes/planoPagamento.routes
 import documento from '@modules/pedido/routes/documento.routes'
 import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
-import { ambiente } from '@shared/consts/ambiente'
+import { ambiente, porta } from '@shared/consts/ambiente'
+import LoggerMiddleware from '@shared/middlewares/logger.middlewares'
 
 const versao = config.versao
 const routes = Router()
 
 routes.get('/', (request, response) => {
   return response.json({
-    versao, ambiente,
+    versao, ambiente, porta
   });
 })
 
 routes.use('/login', sessionsRouter)
 routes.use('/validarToken', validaTokenRouter)
+
+
+routes.use(LoggerMiddleware)
 
 //TODO criar um middlware para validar tenantId
 routes.use('/legadojob3', job3LegadoRouter)

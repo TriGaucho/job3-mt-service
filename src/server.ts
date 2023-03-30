@@ -16,19 +16,6 @@ const versao = config.versao
 app.use(cors())
 app.use(express.json())
 
-// Middleware de log
-app.use((req: Request, res: Response, next: NextFunction) => {
-  const dados = {
-    rota: req.path,
-    metodo: req.method,
-    dados: { ...req.body }
-  }
-
-  Logger.info(dados)
-
-  return next()
-})
-
 app.use(routes)
 
 // Middleware de interceptação de erros
