@@ -1,7 +1,5 @@
 import { Router } from 'express'
 import 'dotenv/config'
-import config from '@config/config'
-import { ambiente, porta } from '@shared/consts/ambiente'
 
 import LoggerMiddleware from '@shared/middlewares/logger.middlewares'
 import ValidaSessaoMiddleware from '@shared/middlewares/validaSessoa.middlewares'
@@ -19,19 +17,12 @@ import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
 import configuracoes from '@modules/configuracao/routes/configuracao.routes'
 
-const versao = config.versao
 const routes = Router()
 
-routes.get('/', (request, response) => {
-  return response.json({
-    versao, ambiente, porta
-  });
-})
 routes.use('/config', configuracoes)
 
 routes.use('/login', sessionsRouter)
 routes.use('/validarToken', validaTokenRouter)
-
 
 routes.use(LoggerMiddleware)
 
@@ -41,7 +32,6 @@ routes.use('/legadojob3', job3LegadoRouter)
 routes.use('/cliente-pedido', clientRouter)
 routes.use('/documento-pedido', pedido)
 routes.use('/produto-pedido', produtoRouter)
-
 
 
 //TODO criar uma validação para usuario ADMIN JOB3

@@ -13,7 +13,7 @@ import { porta } from '@shared/consts/ambiente'
 const app = express()
 const versao = config.versao
 
-app.use(cors())
+app.use(cors(config.cors))
 app.use(express.json())
 
 app.use(routes)
