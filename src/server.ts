@@ -13,7 +13,7 @@ import { ambiente, portaApi } from '@shared/consts/ambiente'
 const app = express()
 const {versao, porta} = config
 
-app.use(cors(config.cors))
+app.use(cors())
 app.use(express.json())
 
 app.use(routes)
@@ -39,6 +39,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(21013, () => {
+app.listen(porta, () => {
   Logger.info(`API de ${ambiente}/${versao}, carregada na porta ${portaApi}`)
 })
