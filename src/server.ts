@@ -39,6 +39,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(porta, () => {
+app.listen(21013, () => {
   Logger.info(`API de ${ambiente}/${versao}, carregada na porta ${portaApi}`)
 })
