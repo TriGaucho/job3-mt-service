@@ -8,7 +8,7 @@ import Logger from './shared/logger/Logger'
 
 import routes from './routes'
 import config from './config/config'
-import { porta } from '@shared/consts/ambiente'
+import { ambiente, porta } from '@shared/consts/ambiente'
 
 const app = express()
 const versao = config.versao
@@ -18,6 +18,7 @@ app.use(express.json())
 
 app.use(routes)
 
+const portaAmbiente = porta
 // Middleware de interceptação de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
@@ -38,6 +39,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(porta, () => {
-  Logger.info({porta, versao})
+app.listen(portaAmbiente, () => {
+  Logger.info(`API de ${ambiente}/${versao}, carregada na porta ${portaAmbiente}`)
 })

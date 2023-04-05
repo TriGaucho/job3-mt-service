@@ -12,3 +12,4 @@ uploads/*
 !uploads/.gitkeep
 
 logs
+ecosystem.config.js
