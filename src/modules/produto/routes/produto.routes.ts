@@ -5,7 +5,7 @@ const produtoRouter = Router()
 
 const produtoController = new ProdutoController()
 
-produtoRouter.get('/:tenantId', produtoController.showAll)
+produtoRouter.get('/:tenantId', produtoController.produtosPorFiltro)
 produtoRouter.get('/:tenantId/tabela/:tabela', produtoController.produtosPorTabela)
 
 export default produtoRouter

@@ -11,6 +11,7 @@ class Produto {
   ativo?: boolean
   created_at?: Date
   updated_at?: Date
+  subclasse?: string
 }
 
 export default Produto
