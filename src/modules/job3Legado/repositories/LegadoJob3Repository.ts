@@ -6,12 +6,12 @@ import Produto from '@modules/produto/entities/Produto'
 import Usuario from "@modules/usuario/entities/Usuario"
 import PlanoPagamento from "@modules/planoPagamento/entities/PlanoPagamento"
 
-class EmpresaRepository {
+class LegadoJob3Repository {
   public async createOrUpdate(dados: Produto[] | Pessoa[] | Usuario[] | PlanoPagamento[], tabela: string): Promise<number> {
     //TODO Repository generico
     return await knex(tabela).insert(dados).onConflict().merge()
       .then((dados) => {
-        Logger.info(dados[0])
+        Logger.info(dados)
         return dados[0]
       })
       .catch(erro => {
@@ -21,4 +21,4 @@ class EmpresaRepository {
   }
 }
 
-export default EmpresaRepository
+export default LegadoJob3Repository

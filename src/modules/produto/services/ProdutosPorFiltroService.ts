@@ -10,7 +10,16 @@ class ProdutosPorFiltroService {
 
     if (!produtos) throw new AppError('Nenhum produto encontrado para o filtro.')
 
-    return produtos
+    return produtos.sort(function (a, b) {
+      if (a.descricao > b.descricao) {
+        return 1;
+      }
+      if (a.descricao < b.descricao) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    })
   }
 }
 

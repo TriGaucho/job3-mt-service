@@ -10,7 +10,16 @@ class ProdutosPorTabelaService  {
 
     if (!produtos) throw new AppError('Nenhum produto para essa tabela.')
 
-    return produtos
+    return produtos.sort(function (a, b) {
+      if (a.descricao > b.descricao) {
+        return 1;
+      }
+      if (a.descricao < b.descricao) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    })
   }
 }
 

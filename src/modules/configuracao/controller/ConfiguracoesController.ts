@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import ConsultaConfiguracoesService from '../services/ConsultaConfiguracoesService'
 import config from '@config/config'
-import { ambiente, ecosystem, porta } from '@shared/consts/ambiente'
+import { ambiente, ecosystem, portaApi } from '@shared/consts/ambiente'
 
 export default class ConfiguracoesController {
   public async show(req: Request, res: Response): Promise<Response> {
@@ -10,6 +10,6 @@ export default class ConfiguracoesController {
     const dados = await consultaConfiguracoesService.execute()
 
     const versaoBackend = config.versao
-    return res.json({dados, versaoBackend, ambiente, porta, ecosystem})
+    return res.json({dados, versaoBackend, ambiente, portaApi, ecosystem})
   }
 }

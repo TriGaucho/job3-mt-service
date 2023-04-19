@@ -1,4 +1,4 @@
-import express, { Request, NextFunction, Response } from 'express'
+import express, { Request, NextFunction, Response,  } from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import 'express-async-errors'
@@ -14,20 +14,20 @@ const app = express()
 const {versao, porta} = config
 
 app.use(cors())
-app.use(express.json())
+
+app.use(express.json({limit: '50mb'}))
+app.use(express.urlencoded({limit: '50mb', extended: true}));
 
 app.use(routes)
 
-// const portaAmbiente = porta
 // Middleware de interceptação de erros
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  Logger.error(error)
   if (error instanceof AppError) {
     const errorObject = {
-      status: 'error',
+      status: 'instanceof AppError',
       message: error.message
     }
-
-    Logger.error(errorObject)
     return res.status(error.statusCode).json(errorObject)
   }
 
@@ -35,7 +35,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     status: 'error',
     message: 'Erro interno do servidor !'
   }
-  Logger.error(errorObject)
+
   return res.status(500).json(errorObject)
 })
 
