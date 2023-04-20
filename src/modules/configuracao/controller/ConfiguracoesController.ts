@@ -7,9 +7,9 @@ export default class ConfiguracoesController {
   public async show(req: Request, res: Response): Promise<Response> {
 
     const consultaConfiguracoesService = new ConsultaConfiguracoesService()
-    const dados = await consultaConfiguracoesService.execute()
+    const dadosBD = await consultaConfiguracoesService.execute()
 
     const versaoBackend = config.versao
-    return res.json({dados, versaoBackend, ambiente, portaApi, ecosystem})
+    return res.json({ versaoBackend, ambiente, portaApi, ecosystem, dadosBD})
   }
 }
