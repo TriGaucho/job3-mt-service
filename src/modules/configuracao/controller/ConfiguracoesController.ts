@@ -10,6 +10,6 @@ export default class ConfiguracoesController {
     const dadosBD = await consultaConfiguracoesService.execute()
 
     const versaoBackend = config.versao
-    return res.json({ versaoBackend, ambiente, portaApi, ecosystem, dadosBD})
+    return res.json({ versaoBackend, ambiente, portaApi, ecosystem, dadosBD })
   }
 }

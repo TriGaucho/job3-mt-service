@@ -2,7 +2,7 @@ class Pessoa {
   idPessoa?: number
   docUsuario?: string
   nome: string
-  segundoNome?: string
+  segundoNome: string
   cpfCnpj: string
   rgInscricao?: string
   email?: string
