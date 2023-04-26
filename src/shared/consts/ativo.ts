@@ -1,1 +1,1 @@
-export const ativo = true;
+export const ativo = 1 ;
