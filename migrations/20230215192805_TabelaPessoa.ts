@@ -22,9 +22,9 @@ exports.up = function (knex) {
       .references('empresa.cnpj')
       .onDelete('RESTRICT')
       .onUpdate('CASCADE')
-      tabela.boolean('ativo').defaultTo(true)
-      tabela.integer('idTipoPessoa', 10).notNullable().unsigned().defaultTo(1)
-      tabela.unique(['cpfCnpj', 'tenantId'])
+    tabela.boolean('ativo').defaultTo(true)
+    tabela.integer('idTipoPessoa', 10).notNullable().unsigned().defaultTo(1)
+    tabela.unique(['cpfCnpj', 'tenantId'])
     tabela.timestamps(true, true)
   })
 }

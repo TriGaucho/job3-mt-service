@@ -9,6 +9,7 @@ class FindClientesPorVendedorService {
 
     if (!pessoasLista) throw new AppError('Nenhum cliente encontrado')
 
+    //TODO criar função reutilizavel para ordenação
     return pessoasLista.sort(function (a, b) {
       if (a.segundoNome > b.segundoNome) {
         return 1;
@@ -16,7 +17,6 @@ class FindClientesPorVendedorService {
       if (a.segundoNome < b.segundoNome) {
         return -1;
       }
-      // a must be equal to b
       return 0;
     })
   }
