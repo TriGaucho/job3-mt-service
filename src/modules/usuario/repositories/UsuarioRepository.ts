@@ -3,6 +3,7 @@ import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Usuario from '../entities/Usuario'
+import { ativo } from "@shared/consts/ativo"
 
 class UsuarioRepository {
   public async create(dados: Usuario[]): Promise<number> {
@@ -18,7 +19,7 @@ class UsuarioRepository {
   }
 
   public async findUsuario(usuario: string, ambiente: string): Promise<any> {
-    return await await knex('usuario as U').where({ usuario, ambiente })
+    return await await knex('usuario as U').where({ usuario, ambiente, 'U.ativo': ativo })
       .innerJoin('empresa as E', 'E.cnpj', 'U.tenantId')
       .select('U.idUsuario', 'U.docUsuario', 'U.nome', 'U.tenantId', 'U.nivel', 'U.senha', 'E.razaoSocial', 'E.fantasia')
       .first()

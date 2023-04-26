@@ -3,6 +3,7 @@ import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Pessoa from "../entities/Pessoa"
+import { ativo } from "@shared/consts/ativo"
 
 class PessoaRepository {
   public async showAll(tenantId: string): Promise<Pessoa[] | void> {
@@ -30,7 +31,7 @@ class PessoaRepository {
   }
 
   public async findClientesPorVendedor(tenantId: string, docUsuario: string): Promise<Pessoa[]| void> {
-    return await knex(pessoa).where({ tenantId, docUsuario, idTipoPessoa: 1, ativo: true })
+    return await knex(pessoa).where({ tenantId, docUsuario, idTipoPessoa: 1, ativo })
       .then((dados) => {
         Logger.info(dados)
         return dados

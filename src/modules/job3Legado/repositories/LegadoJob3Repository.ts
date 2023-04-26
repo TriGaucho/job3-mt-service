@@ -19,6 +19,22 @@ class LegadoJob3Repository {
         throw new AppError(erro.sqlMessage)
       })
   }
+
+
+  public async inativaCriaOuAtualiza(dados: Produto[] | Pessoa[] | Usuario[] | PlanoPagamento[], tabela: string, tenantId: string): Promise<any> {
+    return await knex.transaction(async trx => {
+      await trx(tabela).update({ ativo: 0 }).where({ tenantId })
+      await trx(tabela).insert(dados).onConflict().merge()
+      await trx.commit()
+    })
+      .then((dados) => {
+        return dados
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
 }
 
 export default LegadoJob3Repository

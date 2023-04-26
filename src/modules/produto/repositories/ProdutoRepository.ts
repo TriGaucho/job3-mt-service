@@ -3,6 +3,7 @@ import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import Produto from "../entities/Produto"
+import { ativo } from "@shared/consts/ativo"
 
 class ProdutoRepository {
   public async showAll(tenantId: string): Promise<Produto[] | void> {
@@ -18,7 +19,7 @@ class ProdutoRepository {
   }
 
   public async produtosPorFiltro(tenantId: string, filtro: any): Promise<Produto[] | void> {
-    return await knex(produto).where({ tenantId, ...filtro })
+    return await knex(produto).where({ tenantId, ...filtro, ativo })
       .then((dados) => {
         Logger.info(dados)
         return dados
@@ -31,7 +32,7 @@ class ProdutoRepository {
 
   public async produtosPorTabela(tenantId: string, tipoValor: string): Promise<Produto[] | void> {
     return await knex(produto).select('idProduto', 'codigo', 'descricao', 'unidade', `${tipoValor} as valor`)
-      .where({ tenantId, ativo: true })
+      .where({ tenantId, ativo })
       .then((dados) => {
         Logger.info(dados)
         return dados

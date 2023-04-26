@@ -2,10 +2,11 @@ import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
 import PlanoPagamento from "../entities/PlanoPagamento"
+import { ativo } from "@shared/consts/ativo"
 
 class PlanoPagamentoRepository {
   public async showAll(tenantId: string): Promise<PlanoPagamento[] | void> {
-    return await knex('planoPagamento').where({ tenantId })
+    return await knex('planoPagamento').where({ tenantId, ativo })
       .then((dados) => {
         Logger.info(dados)
         return dados
