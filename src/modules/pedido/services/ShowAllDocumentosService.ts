@@ -25,6 +25,26 @@ class ShowAllDocumentosService {
     return documentoTotalizado
   }
 
+  public async executeAll(tenantId: string, idUsaurio: number): Promise<DocumentoExport[]> {
+
+    const sqlConsultaDocumentos = `${documentosSql}
+      and v.idUsuario = ${idUsaurio}
+      and pp.tenantId = ${tenantId}
+       `
+
+    const documentoRepository = new DocumentoRepository()
+
+    const documentos = await documentoRepository.documentDetails(sqlConsultaDocumentos)
+
+    // if (!documentos) throw new AppError('Nenhum documento encontrado.')
+
+    const factorDocumentos = await this.montaDocumentosExportacao(documentos)
+
+    const documentoTotalizado = await this.calculaTotal(factorDocumentos).then()
+
+    return documentoTotalizado
+  }
+
   async montaDocumentosExportacao (documentosBanco: DocumentoBanco[]): Promise<DocumentoExport[]> {
     const referencia: any = []
     documentosBanco.reduce((p: any, ped) => {
@@ -79,7 +99,8 @@ class ShowAllDocumentosService {
 
   async calculaTotal (documentos: any): Promise<any> {
     documentos.forEach((p: any )=> {
-      p.totalDocumento = p.produtos.reduce(this.totalDocumento, 0)
+      // p.totalDocumento = p.produtos.reduce(this.totalDocumento, 0)
+      p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
     })
 
     return documentos

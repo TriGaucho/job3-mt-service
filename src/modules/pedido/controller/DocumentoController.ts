@@ -3,6 +3,7 @@ import CreateDocumentoService from '../services/CreateDocumentoService'
 import ProximoNumeroService from '../services/ProximoNumeroService'
 import ShowHeadersDocumentosService from '../services/ShowHeadersDocumentosService'
 import FindOneDocumentoService from '../services/FindOneDocumentoService'
+import ShowAllDocumentosService from '../services/ShowAllDocumentosService'
 
 export default class DocumentoController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -24,18 +25,18 @@ export default class DocumentoController {
     return res.json(documento)
   }
 
-  //TODO cabeçalho
   public async headersDocumentos(req: Request, res: Response): Promise<Response> {
     const { tenantId } = req.params
     const { idUsuario } = req.usuario
 
-    const showHeadersDocumentosService = new ShowHeadersDocumentosService()
-    const documentos = await showHeadersDocumentosService.execute(tenantId, idUsuario)
+    // const showHeadersDocumentosService = new ShowHeadersDocumentosService()
+    // const documentos = await showHeadersDocumentosService.execute(tenantId, idUsuario)
+    const showAllDocumentosService = new ShowAllDocumentosService()
+    const documentos = await showAllDocumentosService.executeAll(tenantId, idUsuario)
 
     return res.json(documentos)
   }
 
-  //TODO detalhesPedido
   public async detalhesDocumento(req: Request, res: Response): Promise<Response> {
     const { tenantId, idDocumento } = req.params
 
