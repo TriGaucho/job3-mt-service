@@ -1,7 +1,7 @@
 export const documentosSql = `
 SELECT
     pp.idDocumento,
-    p.numeroDocumento AS numeroPedido,
+    p.numeroDocumento,
     c.nome AS cliente,
     c.idPessoa AS idCliente,
     c.cpfCnpj AS documentoCliente,
