@@ -47,9 +47,11 @@ class CreateSessionService {
       nivel: usuario.nivel,
       nomeEmpresa: usuario.razaoSocial,
       fantasiaEmpresa: usuario.fantasia
-    }, authConfig.jwt.secret as Secret, {
-      expiresIn: authConfig.jwt.expiresIn,
-    });
+    }, authConfig.jwt.secret as Secret
+      // {
+      //   expiresIn: authConfig.jwt.expiresIn,
+      // }
+    );
 
     return {
       user,
