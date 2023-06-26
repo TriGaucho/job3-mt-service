@@ -11,3 +11,4 @@ pm2 flush: libera todos os dados de log, disponibilizando espaço em disco.
 pm2 logs app: saída de logs somente de um aplicativo específico.
 pm2 logs: saída de logs de todos os aplicativos em execução.
 pm2 ls: lista processos
+pm2 delete <api>

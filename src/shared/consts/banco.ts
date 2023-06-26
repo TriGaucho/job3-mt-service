@@ -6,3 +6,4 @@ export const documento = 'documento';
 export const produtosDocumento = 'produtosDocumento';
 export const planoPagamento = 'planoPagamento';
 export const configuracoes = 'config';
+export const chaveApi = 'chaveApi';
