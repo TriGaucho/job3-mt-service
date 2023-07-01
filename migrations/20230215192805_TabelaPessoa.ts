@@ -10,7 +10,7 @@ exports.up = function (knex) {
     tabela.string('segundoNome', 168)
     tabela.string('cpfCnpj', 14).notNullable()
     tabela.string('rgInscricao', 14)
-    tabela.string('email', 168).notNullable()
+    tabela.string('email', 168)
     tabela.string('telefone', 24).notNullable()
     tabela.string('cep', 8).notNullable()
     tabela.string('endereco', 168).notNullable()

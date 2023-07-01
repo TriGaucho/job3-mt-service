@@ -19,12 +19,11 @@ import configuracoes from '@modules/configuracao/routes/configuracao.routes'
 
 const routes = Router()
 
-routes.use('/config', configuracoes)
-
 routes.use('/login', sessionsRouter)
 routes.use('/validarToken', validaTokenRouter)
 
 routes.use(LoggerMiddleware)
+routes.use('/config', configuracoes)
 
 //TODO criar um middlware para validar tenantId
 routes.use('/legadojob3', job3LegadoRouter)
@@ -33,13 +32,10 @@ routes.use('/cliente-pedido', clientRouter)
 routes.use('/documento-pedido', pedido)
 routes.use('/produto-pedido', produtoRouter)
 
-
 //TODO criar uma validação para usuario ADMIN JOB3
 routes.use('/empresa', empresaRouter)
 
-
-//TODO valida rotas que exigem LOGIN
-// routes.use(ValidaSessaoMiddleware)
+routes.use(ValidaSessaoMiddleware)
 routes.use('/usuario', usuarioRouter)
 routes.use('/produto', produtoRouter)
 routes.use('/pessoa', pessoaRouter)
