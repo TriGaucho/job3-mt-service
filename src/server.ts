@@ -8,7 +8,7 @@ import Logger from './shared/logger/Logger'
 
 import routes from './routes'
 import config from './config/config'
-import { ambiente, portaApi } from '@shared/consts/ambiente'
+import { ambiente, api, portaApi } from '@shared/consts/ambiente'
 
 const app = express()
 const {versao, porta} = config
@@ -39,6 +39,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(porta, () => {
-  Logger.info(`API de ${ambiente}/${versao}, carregada na porta ${portaApi}`)
+app.listen(porta, '127.0.0.1',  () => {
+  Logger.info(`API ${api} - ${ambiente}/${versao}, carregada na porta ${portaApi}`)
 })

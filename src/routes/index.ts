@@ -39,11 +39,11 @@ routes.use('/empresa', empresaRouter)
 
 
 //TODO valida rotas que exigem LOGIN
-routes.use(ValidaSessaoMiddleware)
-routes.use('/usuario', usuarioRouter)
-routes.use('/produto', produtoRouter)
-routes.use('/pessoa', pessoaRouter)
-routes.use('/planopagamento', planoPagamento)
-routes.use('/documento', documento)
+// routes.use(ValidaSessaoMiddleware)
+routes.use('/usuario', ValidaSessaoMiddleware, usuarioRouter)
+routes.use('/produto', ValidaSessaoMiddleware, produtoRouter)
+routes.use('/pessoa', ValidaSessaoMiddleware, pessoaRouter)
+routes.use('/planopagamento', ValidaSessaoMiddleware, planoPagamento)
+routes.use('/documento', ValidaSessaoMiddleware, documento)
 
 export default routes
