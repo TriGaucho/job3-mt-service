@@ -98,9 +98,9 @@ class ShowAllDocumentosService {
   }
 
   async calculaTotal (documentos: any): Promise<any> {
+    
     documentos.forEach((p: any )=> {
-      // p.totalDocumento = p.produtos.reduce(this.totalDocumento, 0)
-      p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
+      p.tipoDocumento == 1 ? p.totalDocumento = 0 : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
     })
 
     return documentos
