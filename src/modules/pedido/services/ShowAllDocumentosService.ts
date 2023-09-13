@@ -3,6 +3,8 @@ import {documentosSql} from "@shared/queries/documentoCompleto"
 import DocumentoExport from '../entities/DocumentoExport'
 import DocumentoBanco from '../entities/DocumentoBanco'
 import DocumentoRepository from '../repositories/DocumentoRepository'
+import { tipoDocumentoPedido } from '@shared/consts/tipoDocumento'
+import { quantidadeProdutos, valorZerado } from '@shared/consts/configuracaoPedido'
 
 class ShowAllDocumentosService {
   public async execute(tenantId: string, importado: boolean): Promise<DocumentoExport[]> {
@@ -97,10 +99,10 @@ class ShowAllDocumentosService {
     return referencia
   }
 
-  async calculaTotal (documentos: any): Promise<any> {
+  async calculaTotal (documentos: DocumentoExport[]): Promise<DocumentoExport[]> {
     
     documentos.forEach((p: any )=> {
-      p.tipoDocumento == 1 ? p.totalDocumento = 0 : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
+      p.tipoDocumento == tipoDocumentoPedido && p.produtos.length > quantidadeProdutos ? p.totalDocumento = valorZerado : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
     })
 
     return documentos

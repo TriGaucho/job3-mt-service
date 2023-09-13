@@ -2,7 +2,7 @@ import { portaApi } from '@shared/consts/ambiente'
 import 'dotenv/config'
 
 export default {
-  versao: 20230911,
+  versao: 20230913,
   cors: {
     //TODO revisar politica de CORS
     methods: 'GET, OPTIONS, PUT, POST, DELETE',
