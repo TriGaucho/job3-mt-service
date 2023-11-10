@@ -21,7 +21,7 @@ app.use(express.urlencoded({limit: '50mb', extended: true}));
 app.use(routes)
 
 // Middleware de interceptação de erros
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((error: Error, req: Request, res: Response) => {
   Logger.error(error)
   if (error instanceof AppError) {
     const errorObject = {
@@ -39,6 +39,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   return res.status(500).json(errorObject)
 })
 
-app.listen(porta, '127.0.0.1',  () => {
+app.listen(Number(porta), '127.0.0.1',  () => {
   Logger.info(`API ${api} - ${ambiente}/${versao}, carregada na porta ${portaApi}`)
 })
