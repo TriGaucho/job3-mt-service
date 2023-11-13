@@ -17,17 +17,17 @@ interface IResponse {
   token: string
 }
 class CreateSessionService {
-  public async execute(login: string, senha: string, ambiente: string): Promise<IResponse> {
+  public async execute(login: string, senha: string, ambiente: string): Promise<IResponse | string> {
     const usuarioRepository = new UsuarioRepository()
 
     const usuario = await usuarioRepository.findUsuario(login, ambiente)
 
-    if (!usuario) throw new AppError('Usuário ou Empresa não encontrado.', 401)
+    if (!usuario) return 'Usuário ou Empresa não encontrado.'
 
     const senhaConfirmada = await compare(senha, usuario.senha)
 
     if (!senhaConfirmada) {
-      throw new AppError('Senha incorreta.', 401);
+      return 'Senha incorreta.';
     }
 
     const user = {

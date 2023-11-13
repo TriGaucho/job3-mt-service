@@ -14,16 +14,14 @@ interface iCliente {
 class CreateDocumentoService {
   public async execute(dadosDocumento: Documento, produtosDocumento: ProdutosDocumento[], dadosCliente: iCliente, tenantId: string): Promise<number> {
     const documentoRepository = new DocumentoRepository()
+    const proximoNumeroService = new ProximoNumeroService()
 
     if (dadosCliente) {
       dadosDocumento.cliente = await this.createCliente(tenantId, dadosCliente, dadosDocumento)
     }
 
-    if (!dadosDocumento.numeroDocumento) {
-      const proximoNumeroService = new ProximoNumeroService()
-      const numero = await proximoNumeroService.execute(tenantId)
-      dadosDocumento.numeroDocumento = !numero.proximoNumero ? 1 : numero.proximoNumero
-    }
+    const numero = await proximoNumeroService.execute(tenantId)
+    dadosDocumento.numeroDocumento = !numero.proximoNumero ? 1 : numero.proximoNumero
 
     const cepSemMascara = await RemoveMascara(dadosDocumento.cep)
     const foneSemMascara = await RemoveMascara(dadosDocumento.telefone)
@@ -32,7 +30,8 @@ class CreateDocumentoService {
       ...dadosDocumento,
       cep: cepSemMascara,
       telefone: foneSemMascara,
-      tenantId })
+      tenantId
+    })
 
     if (!idDocumento) throw new AppError('Não foi possível criar o documento.')
 
@@ -55,12 +54,12 @@ class CreateDocumentoService {
   async createCliente(tenantId: string, dadosCliente: iCliente, dadosDocumento: Documento): Promise<number> {
     const createClienteService = new CreateClienteService()
 
-    const { clienteCpf, clienteNome} = dadosCliente
+    const { clienteCpf, clienteNome } = dadosCliente
     const { telefone, cep, logradouro, bairro, cidade, uf } = dadosDocumento
     const cepSemMascara = await RemoveMascara(cep)
     const cpf = await RemoveMascara(clienteCpf)
     const fone = await RemoveMascara(telefone)
-    const cliente = { clienteNome, clienteCpf: cpf , telefone: fone, cep: cepSemMascara, logradouro, bairro, cidade, uf }
+    const cliente = { clienteNome, clienteCpf: cpf, telefone: fone, cep: cepSemMascara, logradouro, bairro, cidade, uf }
 
     return await createClienteService.execute(tenantId, cliente)
   }
