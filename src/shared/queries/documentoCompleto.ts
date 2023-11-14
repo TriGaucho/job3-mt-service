@@ -11,7 +11,7 @@ SELECT
     c.cidade AS cidadeCliente,
     c.uf AS ufCliente,
     p.observacoes,
-    DATE_FORMAT(p.created_at, '%d/%m/%Y %H:%i:%s') AS dataEmissao,
+    DATE_FORMAT(p.created_at, '%d/%m/%Y') AS dataEmissao,
     DATE_FORMAT(p.dataPrevisaoEntrega, '%d/%m/%Y') AS dataPrevisaoEntrega,
     p.email,
     p.telefone,
