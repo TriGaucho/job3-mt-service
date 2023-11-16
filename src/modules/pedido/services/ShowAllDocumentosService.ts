@@ -56,6 +56,7 @@ class ShowAllDocumentosService {
           tipoDocumento: ped.tipoDocumento,
           numeroDocumento: ped.numeroDocumento,
           dataEmissao: ped.dataEmissao,
+          dataDocumento: ped.dataDocumento,
           dataPrevisaoEntrega: ped.dataPrevisaoEntrega,
           observacoes: !ped.observacoes ? '' : ped.observacoes,
           importado: ped.importado,

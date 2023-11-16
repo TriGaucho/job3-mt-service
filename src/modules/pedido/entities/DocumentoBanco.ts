@@ -10,6 +10,7 @@ class DocumentoBanco {
   cidadeCliente: string
   ufCliente: string
   observacoes: string
+  dataDocumento: Date
   dataEmissao: Date
   dataPrevisaoEntrega: Date
   email: string
