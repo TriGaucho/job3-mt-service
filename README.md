@@ -3,6 +3,7 @@
 Backend de emissão de pedidos e integração com ERP Job3 (legado).
 
 ## Modulos
+
 * Empresa
 * Legado Job3
 * Pedido
@@ -13,6 +14,7 @@ Backend de emissão de pedidos e integração com ERP Job3 (legado).
 * Login
 
 ## Requisitos
+
 * MongoDb
 * MySql
 * Node V18
