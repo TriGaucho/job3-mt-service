@@ -1,4 +1,18 @@
-# Atualizações
+# API Job3
 
-## 20230913
-1. ZERAR o Total do Pedido(documentoTipo = 1) quando houver mais de 30 produtos.
+Backend de emissão de pedidos e integração com ERP Job3 (legado).
+
+## Modulos
+* Empresa
+* Legado Job3
+* Pedido
+* Pessoa
+* Plano de Pagamento
+* Produto
+* Usuario
+* Login
+
+## Requisitos
+* MongoDb
+* MySql
+* Node V18
