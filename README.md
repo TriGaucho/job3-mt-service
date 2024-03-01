@@ -11,7 +11,7 @@ Backend de emissão de pedidos e integração com ERP Job3 (legado).
 * Plano de Pagamento
 * Produto
 * Usuario
-* Login
+* Proposta
 
 ## Requisitos
 
