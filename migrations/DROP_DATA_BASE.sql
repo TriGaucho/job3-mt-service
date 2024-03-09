@@ -1,6 +1,8 @@
 
+delete from produtosProposta  ;
 delete from produtosDocumento  ;
 delete from documento ;
+delete from proposta ;
 delete from pessoa ;
 delete from config ;
 delete from chaveApi ;

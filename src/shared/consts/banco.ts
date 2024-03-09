@@ -7,3 +7,5 @@ export const produtosDocumento = 'produtosDocumento';
 export const planoPagamento = 'planoPagamento';
 export const configuracoes = 'config';
 export const chaveApi = 'chaveApi';
+export const tabProposta = 'proposta';
+export const tabProdutosProposta = 'produtosProposta';
