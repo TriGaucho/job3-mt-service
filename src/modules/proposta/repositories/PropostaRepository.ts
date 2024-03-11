@@ -4,6 +4,7 @@ import Logger from "@shared/logger/Logger"
 import { tabProposta, tabProdutosProposta } from "@shared/consts/banco"
 import Proposta from "../entities/Proposta"
 import ProdutosProposta from "../entities/ProdutosProposta"
+import PropostasParaExportacao from "../entities/PropostasParaExportacao"
 
 class PropostaRepository {
   public async createProposta(dados: Proposta): Promise<number> {
@@ -39,6 +40,28 @@ class PropostaRepository {
         return dados
       })
       .catch(erro => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async setImportado(tenantId: string, idProposta: number, importado: number): Promise<number> {
+    return await knex(tabProposta).update({ importado }).where({ tenantId, idProposta })
+      .then((dados) => {
+        return dados
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async exportPropostas(sqlPropostas: string): Promise<PropostasParaExportacao[]> {
+    return await knex.raw(sqlPropostas)
+      .then((dados) => {
+        return dados[0]
+      })
+      .catch((erro) => {
         Logger.error(erro)
         throw new AppError(erro.sqlMessage)
       })
