@@ -5,17 +5,18 @@ import { sqlDadosPropostas } from '@shared/queries/sqlDadosPropostas'
 import montaExportacao from '@shared/utils/montaExportacao'
 import { quantidadeProdutos, valorZerado } from '@shared/consts/configuracaoPedido'
 
-class ExpotacaoPropostasService {
+class GetPropostasService {
 
-  public async execute(tenantId: string, importado: boolean): Promise<PropostasParaExportacao[]> {
+  public async execute(tenantId: string, idUsaurio: number,  importado: boolean): Promise<PropostasParaExportacao[]> {
     const propostaRepository = new PropostaRepository()
 
-    const sql = `${sqlDadosPropostas}
-      and p.importado = ${importado}
+    let sql = `${sqlDadosPropostas}
       and pp.tenantId = ${tenantId}
     `
 
-    const dadosPropostas = await propostaRepository.exportPropostas(sqlDadosPropostas);
+    !importado ? sql += `and p.importado = ${importado}` : sql += `and v.idUsuario = ${idUsaurio}` ;
+    
+    const dadosPropostas = await propostaRepository.exportPropostas(sql);
 
     const propostasNormalizadas = await montaExportacao(dadosPropostas);
 
@@ -38,4 +39,4 @@ class ExpotacaoPropostasService {
   }
 }
 
-export default ExpotacaoPropostasService
+export default GetPropostasService

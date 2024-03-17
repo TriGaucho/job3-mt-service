@@ -1,7 +1,7 @@
 import Documento from "@modules/pedido/entities/DocumentoExport";
 import ShowAllDocumentosService from '@modules/pedido/services/ShowAllDocumentosService'
 import PropostasParaExportacao from "@modules/proposta/entities/PropostasParaExportacao";
-import ExpotacaoPropostasService from "@modules/proposta/services/ExpotacaoPropostasService";
+import GetPropostasService from "@modules/proposta/services/GetPropostasService";
 
 class ExportaDocumentoService {
   public async execute (tenantId: string): Promise<Documento[]> {
@@ -13,9 +13,9 @@ class ExportaDocumentoService {
   }
 
   public async exportacaoPropostas (tenantId: string): Promise<PropostasParaExportacao[]> {
-    const expotacaoPropostasService = new ExpotacaoPropostasService()
+    const expotacaoPropostasService = new GetPropostasService()
 
-    const documentos = expotacaoPropostasService.execute(tenantId, false)
+    const documentos = expotacaoPropostasService.execute(tenantId, 0, false)
 
     return documentos
   }

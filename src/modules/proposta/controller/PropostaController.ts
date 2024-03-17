@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import CreatePropostaService from '../services/CreatePropostaService'
-
+import GetPropostasService from '../services/GetPropostasService'
 export default class PropostaController {
   public async create(req: Request, res: Response): Promise<Response> {
     const createPropostaService = new CreatePropostaService()
@@ -12,4 +12,14 @@ export default class PropostaController {
 
     return res.json(proposta)
   }
+
+  public async get(req: Request, res: Response): Promise < Response > {
+  const getPropostasService = new GetPropostasService()
+    const { tenantId } = req.params
+    const { idUsuario } = req.usuario
+
+    const proposta = await getPropostasService.execute(tenantId, idUsuario, true)
+
+    return res.json(proposta)
+}
 }
