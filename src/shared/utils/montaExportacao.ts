@@ -4,6 +4,7 @@ export default async function montaExportacao (dados: any[]): Promise<any[]> {
     if (!p[ped.idProposta]) {
       p[ped.idProposta] = {
         idProposta: ped.idProposta,
+        tipoDocumento: 3,
         numeroProposta: ped.numeroProposta,
         dataEmissao: ped.dataEmissao,
         dataProposta: ped.dataProposta,

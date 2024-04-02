@@ -4,12 +4,14 @@ import PropostasParaExportacao from "@modules/proposta/entities/PropostasParaExp
 import GetPropostasService from "@modules/proposta/services/GetPropostasService";
 
 class ExportaDocumentoService {
-  public async execute (tenantId: string): Promise<Documento[]> {
+  public async execute (tenantId: string): Promise<any> {
     const showAllDocumentosService = new ShowAllDocumentosService()
+    const expotacaoPropostasService = new GetPropostasService()
 
-    const documentos = showAllDocumentosService.execute(tenantId, false)
+    const pedidos = await showAllDocumentosService.execute(tenantId, false)
+    const propostas = await expotacaoPropostasService.execute(tenantId, 0, false)
 
-    return documentos
+    return { pedidos, propostas }
   }
 
   public async exportacaoPropostas (tenantId: string): Promise<PropostasParaExportacao[]> {
