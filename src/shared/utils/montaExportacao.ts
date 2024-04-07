@@ -3,11 +3,11 @@ export default async function montaExportacao (dados: any[]): Promise<any[]> {
   dados.reduce((p: any, ped) => {
     if (!p[ped.idProposta]) {
       p[ped.idProposta] = {
-        idProposta: ped.idProposta,
-        tipoDocumento: 3,
-        numeroProposta: ped.numeroProposta,
+        idDocumento: ped.idProposta,
+        tipoDocumento: ped.tipoDocumento,
+        numeroDocumento: ped.numeroProposta,
         dataEmissao: ped.dataEmissao,
-        dataProposta: ped.dataProposta,
+        dataDocumento: ped.dataProposta,
         observacoes: !ped.observacoes ? '' : ped.observacoes,
         importado: ped.importado,
         planoPagamento: !ped.planoPagamento ? '' : ped.planoPagamento,

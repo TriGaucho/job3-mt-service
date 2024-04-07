@@ -28,7 +28,7 @@ class GetPropostasService {
   async calculaTotal (documentos: PropostasParaExportacao[]): Promise<PropostasParaExportacao[]> {
 
     documentos.forEach((p: any )=> {
-       p.produtos.length > quantidadeProdutos ? p.totalProposta = valorZerado : p.totalProposta = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
+       p.produtos.length > quantidadeProdutos ? p.totalDocumento = valorZerado : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
     })
 
     return documentos

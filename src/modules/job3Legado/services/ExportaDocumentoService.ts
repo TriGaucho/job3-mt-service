@@ -4,17 +4,27 @@ import PropostasParaExportacao from "@modules/proposta/entities/PropostasParaExp
 import GetPropostasService from "@modules/proposta/services/GetPropostasService";
 
 class ExportaDocumentoService {
-  public async execute (tenantId: string): Promise<any> {
+  public async execute(tenantId: string): Promise<any> {
     const showAllDocumentosService = new ShowAllDocumentosService()
     const expotacaoPropostasService = new GetPropostasService()
 
     const pedidos = await showAllDocumentosService.execute(tenantId, false)
     const propostas = await expotacaoPropostasService.execute(tenantId, 0, false)
 
-    return { pedidos, propostas }
+    const documentos: (Documento | PropostasParaExportacao)[] = [];
+
+    pedidos.forEach((p) => {
+      documentos.push(p)
+    })
+    
+    propostas.forEach((p) => {
+      documentos.push(p)
+    })
+
+    return documentos
   }
 
-  public async exportacaoPropostas (tenantId: string): Promise<PropostasParaExportacao[]> {
+  public async exportacaoPropostas(tenantId: string): Promise<PropostasParaExportacao[]> {
     const expotacaoPropostasService = new GetPropostasService()
 
     const documentos = expotacaoPropostasService.execute(tenantId, 0, false)
