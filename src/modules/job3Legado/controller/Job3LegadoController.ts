@@ -66,19 +66,10 @@ export default class Job3LegadoController {
   }
 
   public async updateDocumento(req: Request, res: Response): Promise<Response> {
-    const { tenantId, importado, idDocumento } = req.params
+    const { tenantId, tipoDocumento, importado, idDocumento } = req.params
 
     const updateDocumentoService = new UpdateDocumentoService()
-    const updateDocumento = await updateDocumentoService.setImportacaoPedido(tenantId, Number(idDocumento), Number(importado))
-
-    return res.json(updateDocumento)
-  }
-
-  public async setImportacaoProposta(req: Request, res: Response): Promise<Response> {
-    const { tenantId, importado, idProposta } = req.params
-
-    const updateDocumentoService = new UpdateDocumentoService()
-    const updateDocumento = await updateDocumentoService.setImportacaoProposta(tenantId, Number(idProposta), Number(importado))
+    const updateDocumento = await updateDocumentoService.setImportacaoPedido(tenantId, Number(tipoDocumento), Number(idDocumento), Number(importado))
 
     return res.json(updateDocumento)
   }

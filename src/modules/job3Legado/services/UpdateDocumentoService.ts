@@ -1,27 +1,27 @@
 import DocumentoRepository from "@modules/pedido/repositories/DocumentoRepository";
 import PropostaRepository from "@modules/proposta/repositories/PropostaRepository";
+import { tipoDocumentoPedido, tipoDocumentoProposta, tipoDocumentoVenda } from "@shared/consts/tipoDocumento";
 import AppError from "@shared/erros/AppError";
 
 
 class UpdateDocumentoService {
-  public async setImportacaoPedido(tenantId: string, idDocumento: number, importado: number): Promise<number> {
+  public async setImportacaoPedido(tenantId: string, idTipoDocumento: number, idDocumento: number, importado: number): Promise<number> {
     const documentoRepository = new DocumentoRepository()
-
-    const documento = documentoRepository.update(tenantId, idDocumento, importado)
-
-    if(!documento) new AppError(`Não foi possível atualizar o(s) documento(s) ${idDocumento}`)
-
-    return documento
-  }
-
-  public async setImportacaoProposta(tenantId: string, idProposta: number, filtro: number): Promise<number> {
     const propostaRepository = new PropostaRepository()
 
-    const proposta = propostaRepository.setImportado(tenantId, idProposta, filtro)
+    let documento
+    switch (idTipoDocumento) {
+      case tipoDocumentoPedido || tipoDocumentoVenda:
+        documento = await documentoRepository.update(tenantId, idDocumento, importado)
+        break
+      case tipoDocumentoProposta:
+        documento = await propostaRepository.setImportado(tenantId, idDocumento, importado)
+        break
+    }
+    if (!documento) new AppError(`Não foi possível atualizar o(s) documento(s) ${idDocumento}`)
+    if (!idTipoDocumento) new AppError(`Necessario indicar idTipoDocumento válido!`)
 
-    if(!proposta) new AppError(`Não foi possível atualizar a(s) proposas(s) ${filtro}`)
-
-    return proposta
+    return Number(documento)
   }
 }
 
