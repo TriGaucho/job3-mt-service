@@ -10,12 +10,12 @@ class UpdateDocumentoService {
     const propostaRepository = new PropostaRepository()
 
     let documento
-    // TODO refatorar par usar constant
     switch (idTipoDocumento) {
-      case 1 || 2:
+      case tipoDocumentoPedido :
+      case tipoDocumentoVenda:
         documento = await documentoRepository.update(tenantId, idDocumento, importado)
         break
-      case 3:
+      case tipoDocumentoProposta:
         documento = await propostaRepository.setImportado(tenantId, idDocumento, importado)
         break
     }
