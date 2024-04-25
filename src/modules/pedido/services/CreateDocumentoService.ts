@@ -30,6 +30,7 @@ class CreateDocumentoService {
       ...dadosDocumento,
       cep: cepSemMascara,
       telefone: foneSemMascara,
+      tipoDocumento: dadosDocumento.tipoDocumento === 0 ? 2 : dadosDocumento.tipoDocumento,
       tenantId
     })
 

@@ -43,7 +43,7 @@ class PessoaRepository {
   }
 
   public async create(dados: Pessoa): Promise<number> {
-    return await knex(pessoa).insert(dados)
+    return await knex(pessoa).insert(dados).onConflict().merge()
       .then((dados) => {
         Logger.info(dados[0])
         return dados[0]
