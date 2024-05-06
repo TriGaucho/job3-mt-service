@@ -1,7 +1,7 @@
 export const sqlDadosPropostas = `
 SELECT
     pp.idProposta,
-    p.numeroProposta,
+    p.numeroDocumento,
     p.tipoDocumento,
     c.nome AS cliente,
     c.idPessoa AS idCliente,

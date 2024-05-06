@@ -1,13 +1,13 @@
 class Proposta {
-  idProposta?: number;
-  numeroProposta?: number;
+  idDocumento?: number;
+  numeroDocumento?: number;
   tenantId?: string;
   cliente?: number;
   idUsuario?: number;
   email?: string;
   planoPagamento?: string;
-  telefone?: string;
-  cep?: string;
+  telefone: string;
+  cep: string;
   logradouro?: string;
   bairro?: string;
   cidade?: string;
@@ -16,6 +16,7 @@ class Proposta {
   dataValidade?: Date;
   dataAprovada?: Date;
   importado?: boolean;
+  tipoDocumento: number;
 }
 
 export default Proposta

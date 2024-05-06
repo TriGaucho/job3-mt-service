@@ -5,10 +5,11 @@ export default class PropostaController {
   public async create(req: Request, res: Response): Promise<Response> {
     const createPropostaService = new CreatePropostaService()
 
-    const { dadosProposta, produtosProposta } = req.body
+    const { dadosProposta, produtosProposta, dadosCliente } = req.body
     const { tenantId } = req.params
+    const { docUsuario } = req.usuario
 
-    const proposta = await createPropostaService.execute(dadosProposta, produtosProposta, tenantId)
+    const proposta = await createPropostaService.execute(dadosProposta, produtosProposta, dadosCliente, tenantId, docUsuario)
 
     return res.json(proposta)
   }

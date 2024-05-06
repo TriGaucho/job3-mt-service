@@ -1,8 +1,8 @@
 version: '3'
 services:
-  db:
+  api_job3:
+    container_name: bd_job3
     image: mysql:latest
-    restart: always
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: 12345678
@@ -10,4 +10,4 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /path/on/host:/var/lib/mysql
+      - ./mysql_data:/var/lib/mysql  

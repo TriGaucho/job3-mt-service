@@ -5,7 +5,7 @@ export default async function montaExportacao (dados: any[]): Promise<any[]> {
       p[ped.idProposta] = {
         idDocumento: ped.idProposta,
         tipoDocumento: ped.tipoDocumento,
-        numeroDocumento: ped.numeroProposta,
+        numeroDocumento: ped.numeroDocumento,
         dataEmissao: ped.dataEmissao,
         dataDocumento: ped.dataProposta,
         observacoes: !ped.observacoes ? '' : ped.observacoes,

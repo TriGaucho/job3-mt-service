@@ -1,4 +1,3 @@
-import AppError from '@shared/erros/AppError'
 import PropostasParaExportacao from '../entities/PropostasParaExportacao'
 import PropostaRepository from '../repositories/PropostaRepository'
 import { sqlDadosPropostas } from '@shared/queries/sqlDadosPropostas'
