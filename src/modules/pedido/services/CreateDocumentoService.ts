@@ -12,7 +12,12 @@ interface iCliente {
 }
 
 class CreateDocumentoService {
-  public async execute(dadosDocumento: Documento, produtosDocumento: ProdutosDocumento[], dadosCliente: iCliente, tenantId: string): Promise<number> {
+  public async execute(dadosDocumento: Documento,
+    produtosDocumento: ProdutosDocumento[],
+    dadosCliente: iCliente,
+    tenantId: string,
+    docUsuario: string): Promise<number> {
+
     const documentoRepository = new DocumentoRepository()
     const proximoNumeroService = new ProximoNumeroService()
     const createClienteService = new CreateClienteService()
@@ -21,6 +26,7 @@ class CreateDocumentoService {
       const { telefone, cep, logradouro, bairro, cidade, uf } = dadosDocumento
       const dadosClienteNovo = {
         ...dadosCliente,
+        docUsuario,
         telefone, cep, logradouro, bairro, cidade, uf
       }
 
@@ -32,7 +38,7 @@ class CreateDocumentoService {
 
     const idDocumento = await documentoRepository.createDocumento({
       ...dadosDocumento,
-      cep:  await RemoveMascara(dadosDocumento.cep),
+      cep: await RemoveMascara(dadosDocumento.cep),
       telefone: await RemoveMascara(dadosDocumento.telefone),
       tipoDocumento: dadosDocumento.tipoDocumento === 0 ? 2 : dadosDocumento.tipoDocumento,
       tenantId
