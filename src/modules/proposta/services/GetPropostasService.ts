@@ -19,7 +19,7 @@ class GetPropostasService {
 
     const propostasNormalizadas = await montaExportacao(dadosPropostas);
 
-    const propostas = this.calculaTotal(propostasNormalizadas)
+    const propostas = await this.calculaTotal(propostasNormalizadas)
 
     return propostas
   }
