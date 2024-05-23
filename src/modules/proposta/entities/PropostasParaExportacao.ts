@@ -33,6 +33,7 @@ class PropostasParaExportacao {
   desconto: number
   planoPagamento: string
   tipoDocumento: number
+  totalDocumento: number
 }
 
 export default PropostasParaExportacao

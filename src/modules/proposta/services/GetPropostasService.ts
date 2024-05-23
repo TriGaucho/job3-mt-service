@@ -24,17 +24,38 @@ class GetPropostasService {
     return propostas
   }
 
-  async calculaTotal (documentos: PropostasParaExportacao[]): Promise<PropostasParaExportacao[]> {
+  // async calculaTotal (documentos: PropostasParaExportacao[]): Promise<PropostasParaExportacao[]> {
 
-    documentos.forEach((p: any )=> {
-       p.produtos.length > quantidadeProdutos ? p.totalDocumento = valorZerado : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
-    })
+  //   documentos.forEach((p: any )=> {
+  //      p.produtos.length > quantidadeProdutos ? p.totalDocumento = valorZerado : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
+  //   })
 
-    return documentos
+  //   return documentos
+  // }
+
+  // totalDocumento (total: number, item: any) {
+  //   return total + (item.valorUnitario * item.quantidade)
+  // }
+
+  async calculaTotal(documentos: any): Promise<any> {
+    for (let i = 0; i < documentos.length; i++) {
+      const documento = documentos[i];
+      const totalDocumento = this.calcularTotalDocumento(documento.produtos);
+      documento.totalDocumento = totalDocumento;
+    }
+    
+    return documentos;
   }
 
-  totalDocumento (total: number, item: any) {
-    return total + (item.valorUnitario * item.quantidade)
+   calcularTotalDocumento(produtos: any[]): number {
+    let total = 0;
+    produtos.forEach((produto) => {
+      const quantidade = parseFloat(produto.quantidade);
+      const valorUnitario = parseFloat(produto.valorUnitario);
+      const desconto = parseFloat(produto.desconto);
+      total += (quantidade * valorUnitario) - desconto;
+    });
+    return parseFloat(total.toFixed(2));
   }
 }
 
