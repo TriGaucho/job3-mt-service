@@ -1,0 +1,13 @@
+version: '3'
+services:
+  api_job3:
+    container_name: bd_job3
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: bd-dev-local
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql  

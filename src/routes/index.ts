@@ -13,6 +13,7 @@ import clientRouter from '@modules/pessoa/routes/cliente.routes'
 import produtoRouter from '@modules/produto/routes/produto.routes'
 import planoPagamento from '@modules/planoPagamento/routes/planoPagamento.routes'
 import documento from '@modules/pedido/routes/documento.routes'
+import proposta from '@modules/proposta/routes/proposta.routes'
 import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
 import configuracoes from '@modules/configuracao/routes/configuracao.routes'
@@ -41,5 +42,6 @@ routes.use('/produto', produtoRouter)
 routes.use('/pessoa', pessoaRouter)
 routes.use('/planopagamento', planoPagamento)
 routes.use('/documento', documento)
+routes.use('/proposta', proposta)
 
 export default routes

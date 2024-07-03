@@ -43,6 +43,7 @@ class Documento {
   vendedor: vendedorDocumento
   produtos: produtosDocumento[]
   totalDocumento: number
+  tipoDocumento: number
 }
 
 export default Documento

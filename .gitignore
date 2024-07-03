@@ -14,3 +14,4 @@ uploads/*
 logs
 ecosystem.config.js
 package-lock.json
+mysql_data/

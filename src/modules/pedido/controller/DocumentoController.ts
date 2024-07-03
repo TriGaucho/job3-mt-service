@@ -9,9 +9,10 @@ export default class DocumentoController {
   public async create(req: Request, res: Response): Promise<Response> {
     const { dadosDocumento, produtosDocumento, dadosCliente } = req.body
     const { tenantId } = req.params
+    const docUsuario  = req.usuario?.docUsuario
 
     const createDocumentoService = new CreateDocumentoService()
-    const documento = await createDocumentoService.execute(dadosDocumento, produtosDocumento, dadosCliente, tenantId)
+    const documento = await createDocumentoService.execute(dadosDocumento, produtosDocumento, dadosCliente, tenantId, docUsuario)
 
     return res.json(documento)
   }

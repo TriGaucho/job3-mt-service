@@ -22,7 +22,7 @@ class ShowAllDocumentosService {
 
     const factorDocumentos = await this.montaDocumentosExportacao(documentos)
 
-    const documentoTotalizado = await this.calculaTotal(factorDocumentos).then()
+    const documentoTotalizado = await this.calculaTotal(factorDocumentos)
 
     return documentoTotalizado
   }
@@ -42,7 +42,7 @@ class ShowAllDocumentosService {
 
     const factorDocumentos = await this.montaDocumentosExportacao(documentos)
 
-    const documentoTotalizado = await this.calculaTotal(factorDocumentos).then()
+    const documentoTotalizado = await this.calculaTotal(factorDocumentos)
 
     return documentoTotalizado
   }
@@ -100,17 +100,25 @@ class ShowAllDocumentosService {
     return referencia
   }
 
-  async calculaTotal (documentos: DocumentoExport[]): Promise<DocumentoExport[]> {
-
-    documentos.forEach((p: any )=> {
-      p.tipoDocumento == tipoDocumentoPedido && p.produtos.length > quantidadeProdutos ? p.totalDocumento = valorZerado : p.totalDocumento = parseFloat(p.produtos.reduce(this.totalDocumento, 0).toFixed(2))
-    })
-
-    return documentos
+  async calculaTotal(documentos: DocumentoExport[]): Promise<DocumentoExport[]> {
+    for (let i = 0; i < documentos.length; i++) {
+      const documento = documentos[i];
+      const totalDocumento = this.calcularTotalDocumento(documento.produtos);
+      documento.totalDocumento = totalDocumento;
+    }
+    
+    return documentos;
   }
 
-  totalDocumento (total: number, item: any) {
-    return total + (item.valorUnitario * item.quantidade)
+   calcularTotalDocumento(produtos: any[]): number {
+    let total = 0;
+    produtos.forEach((produto) => {
+      const quantidade = parseFloat(produto.quantidade);
+      const valorUnitario = parseFloat(produto.valorUnitario);
+      const desconto = parseFloat(produto.desconto);
+      total += (quantidade * valorUnitario) - desconto;
+    });
+    return parseFloat(total.toFixed(2));
   }
 }
 
