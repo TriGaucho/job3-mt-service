@@ -1,9 +1,8 @@
-import PropostasParaExportacao from "@modules/proposta/entities/PropostasParaExportacao";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
-import { extrairData } from "src/common/helpers/datas.helper";
-import { mascaraCEP, mascaraTelefone } from "src/common/helpers/telefone.helper";
-import { IDocumento } from "src/common/interfaces/documento.interface";
-import { IUsuario } from "src/common/interfaces/usuario.interface";
+import { extrairData } from "@shared/helpers/datas.helper";
+import { mascaraCEP, mascaraTelefone } from "@shared/helpers/telefone.helper";
+import { IDocumento } from "@shared/interfaces/documento.interface";
+import { IUsuario } from "@shared/interfaces/usuario.interface";
 
 export const propostaReport = (dadosProposta: IDocumento, dadosUsaurios: IUsuario): TDocumentDefinitions => {
     return {

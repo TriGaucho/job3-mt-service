@@ -1,8 +1,8 @@
 import PdfPrinter from 'pdfmake'
 import { propostaReport } from './reports/proposta.report'
 import PropostasParaExportacao from '@modules/proposta/entities/PropostasParaExportacao'
-import { IDocumento } from 'src/common/interfaces/documento.interface'
-import { IUsuario } from 'src/common/interfaces/usuario.interface'
+import { IDocumento } from '@shared/interfaces/documento.interface'
+import { IUsuario } from '@shared/interfaces/usuario.interface'
 
 const fonts = {
     Roboto: {
