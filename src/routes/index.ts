@@ -18,6 +18,8 @@ import pedido from '@modules/pedido/routes/pedido.routes'
 import job3LegadoRouter from '@modules/job3Legado/routes/job3Legado.routes'
 import configuracoes from '@modules/configuracao/routes/configuracao.routes'
 
+import pdfRouter from '@modules/pdf/pdf.routes'
+
 const routes = Router()
 
 routes.use('/login', sessionsRouter)
@@ -43,5 +45,6 @@ routes.use('/pessoa', pessoaRouter)
 routes.use('/planopagamento', planoPagamento)
 routes.use('/documento', documento)
 routes.use('/proposta', proposta)
+routes.use('/pdf', pdfRouter)
 
 export default routes
