@@ -6,5 +6,6 @@ const validaToken = Router()
 const sessionsController = new SessionsController()
 
 validaToken.post('/', sessionsController.validToken)
+validaToken.get('/', sessionsController.modulos)
 
 export default validaToken

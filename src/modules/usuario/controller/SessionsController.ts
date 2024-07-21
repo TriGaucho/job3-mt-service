@@ -20,4 +20,8 @@ export default class SessionsController {
 
     return res.json(sessao)
   }
+
+  public async modulos(req: Request, res: Response): Promise<Response> {
+    return res.json({ message: 'Logout realizado com sucesso' })
+  }
 }
