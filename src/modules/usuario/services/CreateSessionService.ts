@@ -16,6 +16,7 @@ interface IResponse {
     fantasiaEmpresa: string
     controle?: IConfiguracaoEmpresa
     modulos: any[] // Add the 'modulos' property
+    menus: any[] // Add the 'menus' property
   }
   token: string
 }
@@ -64,8 +65,11 @@ class CreateSessionService {
     const modulos = await usuarioRepository.getModulos(user.idUsuario, user.emp)
     const acessos = transformarArrayEmObjeto(modulos)
     
+    const menus = await usuarioRepository.getMenus(user.idUsuario, user.emp)
+    const menusAcessos = transformarArrayEmObjeto(menus)
+
     return {
-      user: {...user, modulos: acessos},
+      user: {...user, modulos: acessos, menus},
       token
     }
   }
