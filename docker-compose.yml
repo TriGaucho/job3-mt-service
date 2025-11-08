@@ -1,13 +1,26 @@
-version: '3'
+  # version attribute removed as it is obsolete
+networks:
+  network:
+    driver: bridge
+volumes:
+  mysql:
+
 services:
   api_job3:
-    container_name: bd_job3
-    image: mysql:latest
+    image: mysql:8.0
+    container_name: job3-container
+    restart: always
+    volumes:
+      - mysql:/var/lib/mysql
+    networks:
+      - network
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_USER: root
+      MYSQL_PASSWORD: KuvcCHKX
+      MYSQL_ROOT_PASSWORD: NfMdh3cr
       MYSQL_DATABASE: bd-dev-local
     ports:
-      - "3306:3306"
-    volumes:
-      - ./mysql_data:/var/lib/mysql  
+      - 3310:3306
+    labels:
+      - "traefik.enable=false"
+    

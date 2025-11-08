@@ -9,3 +9,5 @@ export const configuracoes = 'config';
 export const chaveApi = 'chaveApi';
 export const tabProposta = 'proposta';
 export const tabProdutosProposta = 'produtosProposta';
+export const moduloAcesso = 'moduloAcesso';
+export const modulo = 'modulo';

@@ -3,6 +3,7 @@ import { Secret, sign } from 'jsonwebtoken'
 import authConfig from '@config/auth'
 import AppError from '@shared/erros/AppError'
 import UsuarioRepository from '../repositories/UsuarioRepository'
+import { transformarArrayEmObjeto } from '@shared/helpers/transformarArrayEmObjeto.helper'
 
 interface IResponse {
   user: {
@@ -13,14 +14,22 @@ interface IResponse {
     nivel: number
     nomeEmpresa: string
     fantasiaEmpresa: string
+    controle?: IConfiguracaoEmpresa
+    modulos: any[] // Add the 'modulos' property
+    menus: any[] // Add the 'menus' property
   }
   token: string
+}
+
+interface IConfiguracaoEmpresa{
+  exibeCodigoDescicao: boolean
 }
 class CreateSessionService {
   public async execute(login: string, senha: string, ambiente: string): Promise<IResponse | string> {
     const usuarioRepository = new UsuarioRepository()
 
     const usuario = await usuarioRepository.findUsuario(login, ambiente)
+   
 
     if (!usuario) return 'Usuário ou Empresa não encontrado.'
 
@@ -53,8 +62,14 @@ class CreateSessionService {
       // }
     );
 
+    const modulos = await usuarioRepository.getModulos(user.idUsuario, user.emp)
+    const acessos = transformarArrayEmObjeto(modulos)
+    
+    const menus = await usuarioRepository.getMenus(user.idUsuario, user.emp)
+    const menusAcessos = transformarArrayEmObjeto(menus)
+
     return {
-      user,
+      user: {...user, modulos: acessos, menus},
       token
     }
   }

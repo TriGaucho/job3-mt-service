@@ -31,6 +31,7 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/knex": "^0.16.1",
     "@types/node": "^18.13.0",
+    "@types/pdfmake": "^0.2.9",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "babel-plugin-module-resolver": "^5.0.0",
@@ -50,6 +51,7 @@
     "knex": "^2.4.2",
     "moment": "^2.29.4",
     "mysql2": "^3.1.2",
+    "pdfmake": "^0.2.10",
     "winston": "^3.8.2"
   }
 }
