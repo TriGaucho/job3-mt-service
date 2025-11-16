@@ -21,6 +21,7 @@ class Documento {
   clienteNome: string
   clienteCpf: string
   tipoDocumento: number
+  excluido: boolean
 }
 
 export default Documento
