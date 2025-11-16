@@ -4,6 +4,7 @@ import ProximoNumeroService from '../services/ProximoNumeroService'
 import ShowHeadersDocumentosService from '../services/ShowHeadersDocumentosService'
 import FindOneDocumentoService from '../services/FindOneDocumentoService'
 import ShowAllDocumentosService from '../services/ShowAllDocumentosService'
+import ExcluirDocumentoService from '../services/ExcluirPropostaService'
 
 export default class DocumentoController {
   public async create(req: Request, res: Response): Promise<Response> {
@@ -43,6 +44,15 @@ export default class DocumentoController {
 
     const findOneDocumentoService = new FindOneDocumentoService()
     const documentos = await findOneDocumentoService.execute(tenantId, parseInt(idDocumento))
+
+    return res.json(documentos)
+  }
+
+  public async excluirDocumento(req: Request, res: Response): Promise<Response> {
+    const { tenantId, idDocumento } = req.params
+
+    const excluirDocumentoService = new ExcluirDocumentoService()
+    const documentos = await excluirDocumentoService.execute({ tenantId, idDocumento: parseInt(idDocumento) })
 
     return res.json(documentos)
   }

@@ -1,9 +1,9 @@
+import { tabProdutosProposta, tabProposta } from "@shared/consts/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
-import { tabProposta, tabProdutosProposta } from "@shared/consts/banco"
-import Proposta from "../entities/Proposta"
 import ProdutosProposta from "../entities/ProdutosProposta"
+import Proposta from "../entities/Proposta"
 import PropostasParaExportacao from "../entities/PropostasParaExportacao"
 
 class PropostaRepository {
@@ -60,6 +60,18 @@ class PropostaRepository {
     return await knex.raw(sqlPropostas)
       .then((dados) => {
         return dados[0]
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async exclusaoLogica(dados: { tenantId: string, idProposta: number }): Promise<number> {
+    const { tenantId, idProposta } = dados
+    return await knex(tabProposta).update({ excluido: true }).where({ tenantId, idProposta})
+      .then((dados) => {
+        return dados
       })
       .catch((erro) => {
         Logger.error(erro)
