@@ -33,7 +33,8 @@ SELECT
     pp.valorUnidade,
     pp.desconto,
     p.planoPagamento,
-    p.tipoDocumento
+    p.tipoDocumento,
+    p.excluido
 FROM
 		produtosDocumento pp
         INNER JOIN documento AS p ON p.idDocumento = pp.idDocumento

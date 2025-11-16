@@ -32,6 +32,7 @@ class ShowAllDocumentosService {
     const sqlConsultaDocumentos = `${documentosSql}
       and v.idUsuario = ${idUsaurio}
       and pp.tenantId = ${tenantId}
+      and p.excluido = 0
        `
 
     const documentoRepository = new DocumentoRepository()

@@ -32,7 +32,8 @@ SELECT
     pp.quantidade,
     pp.valorUnidade,
     pp.desconto,
-    p.planoPagamento
+    p.planoPagamento,
+    p.excluido
 FROM
 		produtosProposta pp
         INNER JOIN proposta AS p ON p.idProposta = pp.idproposta
