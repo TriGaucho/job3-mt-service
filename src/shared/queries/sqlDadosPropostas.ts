@@ -21,7 +21,7 @@ SELECT
     p.bairro AS bairroEntrega,
     p.cidade AS cidadeEntrega,
     p.uf AS ufEntrega,
-    p.importado,
+    CASE WHEN p.importado = 1 THEN 'SIM' ELSE 'NÃO' END AS importado,
     v.idUsuario AS idVendedor,
     v.nome AS vendedor,
     v.docUsuario AS documentoVendedor,

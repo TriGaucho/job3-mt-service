@@ -1,10 +1,10 @@
-import AppError from '@shared/erros/AppError'
-import Proposta from '../entities/Proposta'
-import ProdutosProposta from '../entities/ProdutosProposta'
-import PropostaRepository from '../repositories/PropostaRepository'
-import InsertIdAndTenantId from '@shared/utils/insertIdAndTenantId';
 import CreateClienteService from '@modules/pessoa/services/CreateClienteService';
+import AppError from '@shared/erros/AppError';
+import InsertIdAndTenantId from '@shared/utils/insertIdAndTenantId';
 import RemoveMascara from '@shared/utils/removeMascaraCPF';
+import ProdutosProposta from '../entities/ProdutosProposta';
+import Proposta from '../entities/Proposta';
+import PropostaRepository from '../repositories/PropostaRepository';
 interface iCliente {
   clienteNome: string
   clienteCpf: string

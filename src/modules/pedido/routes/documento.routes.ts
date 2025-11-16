@@ -9,5 +9,6 @@ documentoRouter.get('/proximoNumero/:tipo/:tenantId', empresaController.proximoN
 documentoRouter.get('/:tenantId/:idDocumento', empresaController.detalhesDocumento)
 documentoRouter.get('/:tenantId', empresaController.headersDocumentos)
 documentoRouter.post('/:tenantId', empresaController.create)
+documentoRouter.delete('/:tenantId/:idDocumento', empresaController.excluirDocumento)
 
 export default documentoRouter

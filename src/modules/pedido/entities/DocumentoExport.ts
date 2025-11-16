@@ -44,6 +44,7 @@ class Documento {
   produtos: produtosDocumento[]
   totalDocumento: number
   tipoDocumento: number
+  excluido: boolean
 }
 
 export default Documento

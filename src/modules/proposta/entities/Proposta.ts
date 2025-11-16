@@ -17,6 +17,7 @@ class Proposta {
   dataAprovada?: Date;
   importado?: boolean;
   tipoDocumento: number;
+  excluido: boolean;
 }
 
 export default Proposta

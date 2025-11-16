@@ -33,6 +33,7 @@ class DocumentoBanco {
   desconto: number
   planoPagamento: string
   tipoDocumento: number
+  excluido: boolean
 }
 
 export default DocumentoBanco

@@ -1,7 +1,7 @@
+import { documento, produtosDocumento } from "@shared/consts/banco"
 import AppError from "@shared/erros/AppError"
 import knex from "@shared/knex"
 import Logger from "@shared/logger/Logger"
-import { documento, produtosDocumento } from "@shared/consts/banco"
 import Documento from '../entities/Documento'
 import DocumentoBanco from '../entities/DocumentoBanco'
 import ProdutosDocumento from '../entities/ProdutosDocumento'
@@ -67,6 +67,7 @@ class DocumentoRepository {
       })
   }
 
+
   public async proximoNumero(sql: string): Promise<number> {
     return await knex.raw(sql)
       .then((dados) => {
@@ -84,6 +85,18 @@ class DocumentoRepository {
       .join('usuario AS ven', 'ven.idUsuario', 'documento.idUsuario')
       .select('ven.nome', 'cli.nome', 'documento.*')
       .where({ 'documento.tenantId': tenantId, 'documento.idUsuario': idUsuario })
+      .then((dados) => {
+        return dados
+      })
+      .catch((erro) => {
+        Logger.error(erro)
+        throw new AppError(erro.sqlMessage)
+      })
+  }
+
+  public async exclusaoLogica(dados: {tenantId: string, idDocumento: number}): Promise<number> {
+    const { tenantId, idDocumento } = dados
+    return await knex(documento).update({ excluido: true }).where({ tenantId, idDocumento })
       .then((dados) => {
         return dados
       })

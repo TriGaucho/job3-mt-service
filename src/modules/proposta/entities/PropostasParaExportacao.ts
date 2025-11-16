@@ -34,6 +34,7 @@ class PropostasParaExportacao {
   planoPagamento: string
   tipoDocumento: number
   totalDocumento: number
+  excluido: boolean;
 }
 
 export default PropostasParaExportacao
