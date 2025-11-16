@@ -11,6 +11,7 @@ class GetPropostasService {
 
     let sql = `${sqlDadosPropostas}
       and pp.tenantId = ${tenantId}
+      and p.excluido = 0
     `
 
     !importado ? sql += `and p.importado = ${importado}` : sql += `and v.idUsuario = ${idUsaurio}`;
