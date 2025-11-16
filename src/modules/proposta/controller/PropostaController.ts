@@ -14,13 +14,13 @@ export default class PropostaController {
     return res.json(proposta)
   }
 
-  public async get(req: Request, res: Response): Promise < Response > {
-  const getPropostasService = new GetPropostasService()
+  public async get(req: Request, res: Response): Promise<Response> {
+    const getPropostasService = new GetPropostasService()
     const { tenantId } = req.params
     const { idUsuario } = req.usuario
 
     const proposta = await getPropostasService.execute(tenantId, idUsuario, true)
 
     return res.json(proposta)
-}
+  }
 }

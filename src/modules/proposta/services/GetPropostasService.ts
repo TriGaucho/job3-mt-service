@@ -6,15 +6,15 @@ import { quantidadeProdutos, valorZerado } from '@shared/consts/configuracaoPedi
 
 class GetPropostasService {
 
-  public async execute(tenantId: string, idUsaurio: number,  importado: boolean): Promise<PropostasParaExportacao[]> {
+  public async execute(tenantId: string, idUsaurio: number, importado: boolean): Promise<PropostasParaExportacao[]> {
     const propostaRepository = new PropostaRepository()
 
     let sql = `${sqlDadosPropostas}
       and pp.tenantId = ${tenantId}
     `
 
-    !importado ? sql += `and p.importado = ${importado}` : sql += `and v.idUsuario = ${idUsaurio}` ;
-    
+    !importado ? sql += `and p.importado = ${importado}` : sql += `and v.idUsuario = ${idUsaurio}`;
+
     const dadosPropostas = await propostaRepository.exportPropostas(sql);
 
     const propostasNormalizadas = await montaExportacao(dadosPropostas);
@@ -43,11 +43,11 @@ class GetPropostasService {
       const totalDocumento = this.calcularTotalDocumento(documento.produtos);
       documento.totalDocumento = totalDocumento;
     }
-    
+
     return documentos;
   }
 
-   calcularTotalDocumento(produtos: any[]): number {
+  calcularTotalDocumento(produtos: any[]): number {
     let total = 0;
     produtos.forEach((produto) => {
       const quantidade = parseFloat(produto.quantidade);
