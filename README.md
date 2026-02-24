@@ -19,13 +19,33 @@ Backend de emissão de pedidos e integração com ERP Job3 (legado).
 * MySql
 * Node V18
 
-Banco de dados:
+## Banco de dados:
 
-Criar migartion
-npx knex migrate:make
+### Criando Migrations
+```
+npx knex migrate:make <nome>
+```
 
-Executar Migration
+### Executar TODAS Migrations
+Executa o comando **up** das migrations.
+```
 npx knex migrate:latest
+```
 
-Executar UMA a UMA as Migrations
+### Executar UMA a UMA as Migrations
+Executa o comando **up** das migrations.
+```
 npx knex migrate:up <nomeMigratio.js>
+```
+
+### Desfazer Migrations
+Executa o comando **down** das migrations.
+```
+npx knex migrate:rollback
+```
+
+### Desfaz UMA a UMA as Migrations
+Executa o comando **down** das migrations.
+```
+npx knex migrate:down <nomeMigratio.js>
+```

@@ -11,3 +11,4 @@ export const tabProposta = 'proposta';
 export const tabProdutosProposta = 'produtosProposta';
 export const moduloAcesso = 'moduloAcesso';
 export const modulo = 'modulo';
+export const vencimentoSenhas = 'vencimentoSenhas';
